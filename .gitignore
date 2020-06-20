@@ -1,0 +1,14 @@
+*.vs
+/vs
+*/bin
+*/obj
+/obj
+/bin
+*.sln
+*/*.sln
+*.jpg
+*/*.user
+*/*.filters
+*/*.vcxproj
+Build/
+.vscode/
