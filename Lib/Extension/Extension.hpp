@@ -14,6 +14,31 @@ namespace Cx
     public:
         ExtendedVector() = default;
 
+        void AddRange(const std::initializer_list<T>& list) noexcept
+        {
+            for(auto element : list)
+                this->push_back(element);
+        }
+
+        void AddRange(const T* const range, const unsigned int size) noexcept
+        {
+            if(range != nullptr)
+                for(unsigned int i = 0; i < size; ++i)
+                    this->push_back(range[i]);
+        }
+
+        void AddRange(const ExtendedVector<T>& vector) noexcept
+        {
+            for(auto element : vector)
+                this->push_back(element);
+        }
+
+        void AddRange(ExtendedVector<T>&& vector) noexcept
+        {
+            for(auto element : vector)
+                this->push_back(element);
+        }
+
 
     private:
     };
