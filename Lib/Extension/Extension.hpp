@@ -40,6 +40,14 @@ namespace Cx
         }
 
 
+        bool Contains( T item ) const noexcept
+        {
+            for( auto it = this->begin(); it != this->end(); ++it )
+                if( *it == item )
+                    return true;
+            return false;
+        }
+
     private:
     };
 }
