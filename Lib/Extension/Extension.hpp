@@ -4,6 +4,9 @@
 #include <memory>
 #include <vector>
 #include <iostream>
+#include <algorithm>
+#include <functional>
+#include <string>
 
 
 namespace Cx
@@ -48,6 +51,65 @@ namespace Cx
             return false;
         }
 
-    private:
+
+        void Sort()
+        {
+            try
+            {
+                std::sort( this->begin(), this->end() );
+            }
+            catch( const std::exception& e )
+            {
+                throw e;
+            }
+        }
+
+        void Sort( const unsigned int positionBegin, const unsigned int positionEnd )
+        {
+            ExtendedVector<T> vector;
+            for( unsigned int i = positionBegin; i <= positionEnd; ++i )
+                vector.push_back( this->at(i) );
+            try
+            {
+                std::sort( vector.begin(), vector.end() );
+                for( unsigned int i = positionBegin, j = 0; i < positionEnd; ++i, ++j )
+                    this->operator[]( i ) = vector.at(j);
+                this->operator[]( positionEnd ) = vector.at( vector.size() - 1 );
+            }
+            catch( std::exception& e )
+            {
+                throw e;
+            }
+        }
+
+        void Sort( std::function<bool( T, T )> comparer )
+        {
+            try
+            {
+                std::sort( this->begin(), this->end(), comparer );
+            }
+            catch( std::exception& e )
+            {
+                throw e;
+            }
+        }
+
+        void Sort( const unsigned int positionBegin, const unsigned int positionEnd, std::function<bool( T, T )> comparer )
+        {
+            ExtendedVector<T> vector;
+            for( unsigned int i = positionBegin; i <= positionEnd; ++i )
+                vector.push_back( this->at( i ) );
+            try
+            {
+                std::sort( vector.begin(), vector.end(), comparer );
+                for( unsigned int i = positionBegin, j = 0; i < positionEnd; ++i, ++j )
+                    this->operator[]( i ) = vector.at( j );
+                this->operator[]( positionEnd ) = vector.at( vector.size() - 1 );
+            }
+            catch( std::exception& e )
+            {
+                throw e;
+            }
+        }
     };
 }

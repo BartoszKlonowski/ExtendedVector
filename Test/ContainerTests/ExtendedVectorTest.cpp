@@ -115,3 +115,112 @@ TEST_F( ExtendedVectorTest, ContainerWithCustomTypesContainsAnElement )
     ASSERT_FALSE( newVector.Contains( Entity( 1, -1 ) ) );
     ASSERT_TRUE( newVector.Contains( Entity( -5, 0.4f ) ) );
 }
+
+
+TEST_F( ExtendedVectorTest, SortingBasicTypesAtWholeScopeWithDefaultComparer )
+{
+    vector.AddRange( { 4,13,2,56,3 } );
+    ASSERT_NO_THROW( vector.Sort() );
+    ASSERT_TRUE( vector[0] == 2 );
+    ASSERT_TRUE( vector[1] == 3 );
+    ASSERT_TRUE( vector[2] == 4 );
+    ASSERT_TRUE( vector[3] == 13 );
+    ASSERT_TRUE( vector[4] == 56 );
+}
+
+
+TEST_F( ExtendedVectorTest, SortingCustomTypesAtWholeScopeWithDefaultComparer )
+{
+    class Entity
+    {
+    public:
+        Entity(int i) : i{i}
+        {}
+        int i;
+        bool operator<( const Entity& e )
+        {
+            return i < e.i;
+        }
+    };
+    Vector<Entity> newVector;
+    newVector.AddRange( { Entity(4),Entity(13),Entity(2),Entity(56),Entity(3) } );
+    ASSERT_NO_THROW( newVector.Sort() );
+    ASSERT_TRUE( newVector[0].i == 2 );
+    ASSERT_TRUE( newVector[1].i == 3 );
+    ASSERT_TRUE( newVector[2].i == 4 );
+    ASSERT_TRUE( newVector[3].i == 13 );
+    ASSERT_TRUE( newVector[4].i == 56 );
+}
+
+
+TEST_F( ExtendedVectorTest, SortingBasicTypesAtSpecifiedScopeWithDefaultComparer )
+{
+    vector.AddRange( { 4,13,2,56,3 } );
+    ASSERT_NO_THROW( vector.Sort(1,3) );
+    ASSERT_TRUE( vector[0] == 4 );
+    ASSERT_TRUE( vector[1] == 2 );
+    ASSERT_TRUE( vector[2] == 13 );
+    ASSERT_TRUE( vector[3] == 56 );
+    ASSERT_TRUE( vector[4] == 3 );
+}
+
+
+TEST_F( ExtendedVectorTest, SortingCustomTypesAtSpecificScopeWithDefaultComparer )
+{
+    class Entity
+    {
+    public:
+        Entity( int i ) : i{ i }
+        {}
+        int i;
+        bool operator<( const Entity& e )
+        {
+            return i < e.i;
+        }
+    };
+    Vector<Entity> newVector;
+    newVector.AddRange( { Entity( 4 ),Entity( 13 ),Entity( 56 ),Entity( 2 ),Entity( 3 ) } );
+    ASSERT_NO_THROW( newVector.Sort(1,3) );
+    ASSERT_TRUE( newVector[0].i == 4 );
+    ASSERT_TRUE( newVector[1].i == 2 );
+    ASSERT_TRUE( newVector[2].i == 13 );
+    ASSERT_TRUE( newVector[3].i == 56 );
+    ASSERT_TRUE( newVector[4].i == 3 );
+}
+
+
+TEST_F( ExtendedVectorTest, SortingBasicTypesAtWholeScopeWithCustomComparer )
+{
+    vector.AddRange( { 4,13,2,56,3 } );
+    ASSERT_NO_THROW( vector.Sort( []( int a, int b )->bool
+        {
+            return a > b;
+        } ));
+    ASSERT_TRUE( vector[0] == 56 );
+    ASSERT_TRUE( vector[1] == 13 );
+    ASSERT_TRUE( vector[2] == 4 );
+    ASSERT_TRUE( vector[3] == 3 );
+    ASSERT_TRUE( vector[4] == 2 );
+}
+
+TEST_F( ExtendedVectorTest, SortingCustomTypesAtSpecificScopeWithCustomComparer )
+{
+    class Entity
+    {
+    public:
+        Entity( int i ) : i{ i }
+        {}
+        int i;
+    };
+    Vector<Entity> newVector;
+    newVector.AddRange( { Entity( 4 ),Entity( 13 ),Entity( 2 ),Entity( 56 ),Entity( 3 ) } );
+    ASSERT_NO_THROW( newVector.Sort( 1, 3, []( Entity a, Entity b )->bool
+        {
+            return a.i > b.i;
+        }) );
+    ASSERT_TRUE( newVector[0].i == 4 );
+    ASSERT_TRUE( newVector[1].i == 56 );
+    ASSERT_TRUE( newVector[2].i == 13 );
+    ASSERT_TRUE( newVector[3].i == 2 );
+    ASSERT_TRUE( newVector[4].i == 3 );
+}
