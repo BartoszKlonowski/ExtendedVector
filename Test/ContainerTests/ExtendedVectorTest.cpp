@@ -224,3 +224,40 @@ TEST_F( ExtendedVectorTest, SortingCustomTypesAtSpecificScopeWithCustomComparer 
     ASSERT_TRUE( newVector[3].i == 2 );
     ASSERT_TRUE( newVector[4].i == 3 );
 }
+
+
+TEST_F( ExtendedVectorTest, BasicTypeElementExistsInTheContainer )
+{
+    vector.AddRange( { 3,4,12,5,98,11 } );
+    auto falsePredicate = []( const int& element )->bool {
+        return element == 6;
+    };
+    auto truePredicate = []( const int& element )->bool {
+        return element == 98;
+    };
+    ASSERT_FALSE( vector.Exists( falsePredicate ) );
+    ASSERT_TRUE( vector.Exists( truePredicate ) );
+}
+
+
+TEST_F( ExtendedVectorTest, CustomTypeElementExistsInTheContainer )
+{
+    class Entity
+    {
+    public:
+        Entity( int i ) : i{ i }
+        {
+        }
+        int i;
+    };
+    Vector<Entity> newVector;
+    newVector.AddRange( { Entity(3),Entity(4),Entity(12),Entity(5),Entity(98),Entity(11) } );
+    auto falsePredicate = []( const Entity& element )->bool {
+        return element.i == 6;
+    };
+    auto truePredicate = []( const Entity& element )->bool {
+        return element.i == 98;
+    };
+    ASSERT_FALSE( newVector.Exists( falsePredicate ) );
+    ASSERT_TRUE( newVector.Exists( truePredicate ) );
+}

@@ -111,5 +111,11 @@ namespace Cx
                 throw e;
             }
         }
+
+
+        const bool Exists( std::function<bool( T )> predicate ) const noexcept
+        {
+            return std::find_if( this->begin(), this->end(), predicate ) != this->end();
+        }
     };
 }
