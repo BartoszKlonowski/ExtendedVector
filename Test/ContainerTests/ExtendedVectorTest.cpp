@@ -261,3 +261,36 @@ TEST_F( ExtendedVectorTest, CustomTypeElementExistsInTheContainer )
     ASSERT_FALSE( newVector.Exists( falsePredicate ) );
     ASSERT_TRUE( newVector.Exists( truePredicate ) );
 }
+
+
+TEST_F( ExtendedVectorTest, CopyToWithCustomStartingIndexesOfBothArrays )
+{
+    vector.AddRange( { 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19 } );
+    int destinationArray[10] = { 0,1,2,3,4,5 };
+    EXPECT_NO_THROW( vector.CopyTo( 11, destinationArray, 7, 3 ) );
+    EXPECT_TRUE( destinationArray[7] == 11 );
+    EXPECT_TRUE( destinationArray[8] == 12 );
+    EXPECT_TRUE( destinationArray[9] == 13 );
+}
+
+TEST_F( ExtendedVectorTest, CopyToAllElements )
+{
+    vector.AddRange( { 10,11,12,13,14,15,16,17,18,19 } );
+    int destinationArray[10] = { 0,1,2,3,4,5 };
+    EXPECT_NO_THROW( vector.CopyTo( destinationArray, 10 ) );
+    EXPECT_TRUE( destinationArray[0] == 10 );
+    EXPECT_TRUE( destinationArray[6] == 16 );
+    EXPECT_TRUE( destinationArray[7] == 17 );
+    EXPECT_TRUE( destinationArray[8] == 18 );
+}
+
+TEST_F( ExtendedVectorTest, CopyToAllElementsWithCustomStartingIndex )
+{
+    vector.AddRange( { 6,7,8,9 } );
+    int destinationArray[10] = { 0,1,2,3,4,5 };
+    EXPECT_NO_THROW( vector.CopyTo( destinationArray, 10, 6 ) );
+    EXPECT_TRUE( destinationArray[0] == 0 );
+    EXPECT_TRUE( destinationArray[6] == 6 );
+    EXPECT_TRUE( destinationArray[7] == 7 );
+    EXPECT_TRUE( destinationArray[8] == 8 );
+}

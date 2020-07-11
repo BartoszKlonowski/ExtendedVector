@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <functional>
 #include <string>
+#include <exception>
 
 
 namespace Cx
@@ -116,6 +117,41 @@ namespace Cx
         const bool Exists( std::function<bool( T )> predicate ) const noexcept
         {
             return std::find_if( this->begin(), this->end(), predicate ) != this->end();
+        }
+
+
+        void CopyTo( const unsigned int index, T* array, const unsigned int arrayIndex, const unsigned int count ) const
+        {
+            if( array == nullptr )
+                throw std::invalid_argument( "array is nullptr" );
+            else if( index >= this->size() || (this->size() - index) > (count - arrayIndex) )
+                throw std::out_of_range( "index exceeds the size of Vector" );
+            for( unsigned int copiedElements = 0; copiedElements < count; ++copiedElements )
+                array[arrayIndex + copiedElements] = this->operator[]( index + copiedElements );
+        }
+
+        void CopyTo( T* array, const unsigned int size )
+        {
+            if( array == nullptr )
+                throw std::invalid_argument( "array is nullptr" );
+            else if( size < this->size() )
+                throw std::invalid_argument( "destination smaller than source" );
+            for( unsigned int i = 0; i < this->size(); ++i )
+            {
+                array[i] = this->at( i );
+            }
+        }
+
+        void CopyTo( T* array, const unsigned int size, unsigned int arrayIndex )
+        {
+            if( array == nullptr )
+                throw std::invalid_argument( "array is nullptr" );
+            else if( size - arrayIndex < this->size() )
+                throw std::invalid_argument( "destination smaller than source" );
+            for( unsigned int i = 0; i < this->size(); ++i, ++arrayIndex )
+            {
+                array[arrayIndex] = this->at( i );
+            }
         }
     };
 }
