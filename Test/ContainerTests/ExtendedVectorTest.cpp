@@ -326,3 +326,17 @@ TEST_F( ExtendedVectorTest, FindCustomTypeElement )
         } ) );
     EXPECT_TRUE( result.i == 23 );
 }
+
+
+TEST_F( ExtendedVectorTest, EraseSpecificElementsOfBasicType )
+{
+    vector.AddRange( { 3,23,12,43,12,32,12 } );
+    vector.RemoveAll( []( int element )->bool
+        {
+            return element == 12;
+        } );
+    ASSERT_TRUE( vector[0] == 3 );
+    ASSERT_TRUE( vector[1] == 23 );
+    ASSERT_TRUE( vector[2] == 43 );
+    ASSERT_TRUE( vector[3] == 32 );
+}

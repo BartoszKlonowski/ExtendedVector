@@ -165,5 +165,11 @@ namespace Cx
                     return it.operator*();
             return T();
         }
+
+
+        void RemoveAll( std::function<bool( T )> predicate ) noexcept
+        {
+            this->erase( std::remove_if( this->begin(), this->end(), predicate ) );
+        }
     };
 }
