@@ -153,5 +153,17 @@ namespace Cx
                 array[arrayIndex] = this->at( i );
             }
         }
+
+
+        T Find( std::function<bool( T )> predicate )
+        {
+            if( predicate == nullptr )
+                throw std::invalid_argument( "predicate is nullptr" );
+
+            for( auto it = this->begin(); it != this->end(); ++it )
+                if( predicate( *it ) == true )
+                    return it.operator*();
+            return T();
+        }
     };
 }

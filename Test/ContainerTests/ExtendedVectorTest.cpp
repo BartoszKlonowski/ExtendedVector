@@ -294,3 +294,35 @@ TEST_F( ExtendedVectorTest, CopyToAllElementsWithCustomStartingIndex )
     EXPECT_TRUE( destinationArray[7] == 7 );
     EXPECT_TRUE( destinationArray[8] == 8 );
 }
+
+
+TEST_F( ExtendedVectorTest, FindBasicTypeElement )
+{
+    vector.AddRange( { 1,4,56,23,37 } );
+    int result = 0;
+    EXPECT_NO_THROW( result = vector.Find( []( int element )->bool
+        {
+            return element == 23;
+        } ) );
+    EXPECT_TRUE( result == 23 );
+}
+
+TEST_F( ExtendedVectorTest, FindCustomTypeElement )
+{
+    class Entity
+    {
+    public:
+        Entity() = default;
+        Entity(int i) : i{i} {}
+        int i;
+    };
+
+    Vector<Entity> newVector;
+    newVector.AddRange( { Entity(1),Entity(4),Entity(56),Entity(23),Entity(37) } );
+    auto result = Entity(0);
+    EXPECT_NO_THROW( result = newVector.Find( []( Entity element )->bool
+        {
+            return element.i == 23;
+        } ) );
+    EXPECT_TRUE( result.i == 23 );
+}
