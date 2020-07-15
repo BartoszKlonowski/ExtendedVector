@@ -340,3 +340,38 @@ TEST_F( ExtendedVectorTest, EraseSpecificElementsOfBasicType )
     ASSERT_TRUE( vector[2] == 43 );
     ASSERT_TRUE( vector[3] == 32 );
 }
+
+
+TEST_F( ExtendedVectorTest, TrueForAllWithBasicType )
+{
+    vector.AddRange( { 1,1,1,1,1,1,1,1 } );
+    ASSERT_TRUE( vector.TrueForAll( []( int element )->bool
+        {
+            return element == 1;
+        } ) );
+    ASSERT_FALSE( vector.TrueForAll( []( int element )->bool
+        {
+            return element == 2;
+        } ) );
+}
+
+TEST_F( ExtendedVectorTest, TrueForAllWithCustomType )
+{
+    class Entity
+    {
+    public:
+        Entity( int i ) : i{ i } {}
+        int i;
+    };
+
+    Vector<Entity> newVector;
+    newVector.AddRange( { Entity( 1 ),Entity( 1 ), Entity( 1 ), Entity( 1 ), Entity( 1 ) } );
+    ASSERT_TRUE( newVector.TrueForAll( []( Entity element )->bool
+        {
+            return element.i == 1;
+        } ) );
+    ASSERT_FALSE( newVector.TrueForAll( []( Entity element )->bool
+        {
+            return element.i == 2;
+        } ) );
+}

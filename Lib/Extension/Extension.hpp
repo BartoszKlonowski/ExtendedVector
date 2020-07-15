@@ -171,5 +171,16 @@ namespace Cx
         {
             this->erase( std::remove_if( this->begin(), this->end(), predicate ) );
         }
+
+
+        const bool TrueForAll( std::function<bool( T )> predicate )
+        {
+            if( predicate == nullptr )
+                throw std::invalid_argument( "predicate is null" );
+            for( auto it = this->cbegin(); it != this->cend(); ++it )
+                if( predicate( *it ) == false )
+                    return false;
+            return true;
+        }
     };
 }
