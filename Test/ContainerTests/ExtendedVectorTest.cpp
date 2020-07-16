@@ -375,3 +375,19 @@ TEST_F( ExtendedVectorTest, TrueForAllWithCustomType )
             return element.i == 2;
         } ) );
 }
+
+
+TEST_F( ExtendedVectorTest, BinarySearchSuccessForBasicType )
+{
+    vector.AddRange( { 1,2,3,4,5,6,7,8,9 } );
+    ASSERT_TRUE( vector.BinarySearch( 4 ) == 3 );
+    ASSERT_TRUE( vector.BinarySearch( 1 ) == 0 );
+    ASSERT_TRUE( vector.BinarySearch( 7 ) == 6 );
+}
+
+TEST_F( ExtendedVectorTest, BinarySearchFailureForBasicType )
+{
+    vector.AddRange( { 1,2,4,5,6,7,8,9 } );
+    ASSERT_TRUE( vector.BinarySearch( 11 ) == -1 );
+    ASSERT_TRUE( vector.BinarySearch( 3 ) == -1 );
+}

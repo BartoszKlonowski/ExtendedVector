@@ -182,5 +182,42 @@ namespace Cx
                     return false;
             return true;
         }
+
+
+        const int BinarySearch( T item ) noexcept
+        {
+            return BinarySearchGenericImplementation( item, [&]( T element )->bool { return element == item; }, 0, this->size() - 1 );
+        }
+
+        const bool BinarySearch( T item, std::function<bool( T )> predicate ) noexcept
+        {
+            return BinarySearchGenericImplementation( item, predicate, 0, this->size() - 1 );
+        }
+
+        const bool BinarySearch( T item, const unsigned int start, const unsigned int count, std::function<bool( T )> predicate )
+        {
+            return BinarySearchGenericImplementation( item, predicate, start, count );
+        }
+
+
+    private:
+        const int BinarySearchGenericImplementation( T item, std::function<bool( T )> predicate, const unsigned int start, const unsigned int count )
+        {
+            constexpr int notFoundResult = -1;
+            unsigned int leftIndex = start;
+            unsigned int rightIndex = start + count >= this->size() ? this->size() - 1 : start + count;
+
+            while( leftIndex <= rightIndex )
+            {
+                auto middle = (rightIndex - leftIndex) / 2 + leftIndex;
+                if( predicate( this->at( middle ) ) )
+                    return middle;
+                else if( item < this->at( middle ) )
+                    rightIndex = middle - 1;
+                else if( item > this->at( middle ) )
+                    leftIndex = middle + 1;
+            }
+            return notFoundResult;
+        }
     };
 }
