@@ -200,6 +200,13 @@ namespace Cx
         }
 
 
+        void Remove( T item ) noexcept
+        {
+            auto it = std::find( this->cbegin(), this->cend(), item );
+            this->erase( it );
+        }
+
+
     private:
         const int BinarySearchGenericImplementation( T item, std::function<bool( T )> predicate, const unsigned int start, const unsigned int count )
         {

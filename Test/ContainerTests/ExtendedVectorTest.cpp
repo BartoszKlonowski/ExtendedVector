@@ -391,3 +391,43 @@ TEST_F( ExtendedVectorTest, BinarySearchFailureForBasicType )
     ASSERT_TRUE( vector.BinarySearch( 11 ) == -1 );
     ASSERT_TRUE( vector.BinarySearch( 3 ) == -1 );
 }
+
+
+TEST_F( ExtendedVectorTest, RemoveItemOfBasicType )
+{
+    vector.AddRange( { 1,4,2,4,67,4,23,5,34,4 } );
+    EXPECT_NO_THROW( vector.Remove( 4 ) );
+    ASSERT_TRUE( vector[0] == 1 );
+    ASSERT_TRUE( vector[1] == 2 );
+    ASSERT_TRUE( vector[2] == 4 );
+    ASSERT_TRUE( vector[3] == 67 );
+    EXPECT_NO_THROW( vector.Remove( 4 ) );
+    ASSERT_TRUE( vector[0] == 1 );
+    ASSERT_TRUE( vector[1] == 2 );
+    ASSERT_TRUE( vector[2] == 67 );
+    ASSERT_TRUE( vector[3] == 4 );
+}
+
+
+TEST_F( ExtendedVectorTest, RemoveItemOfCustomType )
+{
+    class Entity
+    {
+    public:
+        Entity(int i) : i{i} {}
+        int i;
+        const bool operator==( const Entity e ) const { return e.i == this->i; }
+    };
+    Vector<Entity> entities;
+    entities.AddRange( { Entity(2), Entity(4), Entity(8), Entity(1), Entity(8), Entity(7) } );
+    EXPECT_NO_THROW( entities.Remove( Entity( 8 ) ) );
+    ASSERT_TRUE( entities[0] == Entity( 2 ) );
+    ASSERT_TRUE( entities[1] == Entity( 4 ) );
+    ASSERT_TRUE( entities[2] == Entity( 1 ) );
+    ASSERT_TRUE( entities[3] == Entity( 8 ) );
+    EXPECT_NO_THROW( entities.Remove( Entity( 8 ) ) );
+    ASSERT_TRUE( entities[0] == Entity( 2 ) );
+    ASSERT_TRUE( entities[1] == Entity( 4 ) );
+    ASSERT_TRUE( entities[2] == Entity( 1 ) );
+    ASSERT_TRUE( entities[3] == Entity( 7 ) );
+}
