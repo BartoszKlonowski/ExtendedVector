@@ -409,6 +409,59 @@ TEST_F( ExtendedVectorTest, RemoveItemOfBasicType )
 }
 
 
+TEST_F( ExtendedVectorTest, FindLastSuccessForBasicElement )
+{
+    vector.AddRange( { 15,2,4,1,2,4,2,67,23,2,64,3 } );
+    int result = 0;
+    constexpr int expected = 64;
+    EXPECT_NO_THROW( result = vector.FindLast( []( int element )->bool {return element % 2 == 0; } ) );
+    EXPECT_TRUE( result == expected );
+}
+
+TEST_F( ExtendedVectorTest, FindLastFailForBasicElementWhenNoSuchElement )
+{
+    vector.AddRange( { 15,2,4,1,2,4,2,67,23,2,64,3 } );
+    int result = -1;
+    constexpr int expected = 0;
+    EXPECT_NO_THROW( result = vector.FindLast( []( int element )->bool { return element % 13 == 0; } ) );
+    EXPECT_TRUE( result == expected );
+}
+
+TEST_F( ExtendedVectorTest, FindLastSuccessForCustomElement )
+{
+    class Entity
+    {
+    public:
+        Entity( int i ) : i{ i } {}
+        Entity() = default;
+        int i;
+        const bool operator==( const Entity& e ) const { return e.i == this->i; }
+    };
+    Vector<Entity> entities;
+    entities.AddRange( { Entity( 2 ), Entity( 15 ), Entity( 17 ), Entity( 10 ), Entity( 16 ), Entity( 5 ), Entity( 21 ) } );
+    auto result = Entity( 0 );
+    EXPECT_NO_THROW( result = entities.FindLast( []( const Entity& e )->bool {return e.i % 5 == 0; } ) );
+    ASSERT_TRUE( result == Entity( 5 ) );
+}
+
+TEST_F( ExtendedVectorTest, FindLastFailForCustomElementWhenNoSuchElement )
+{
+    class Entity
+    {
+    public:
+        Entity( int i ) : i{ i } {}
+        Entity() = default;
+        int i;
+        const bool operator==( const Entity& e ) const { return e.i == this->i; }
+    };
+    Vector<Entity> entities;
+    entities.AddRange( { Entity( 2 ), Entity( 15 ), Entity( 17 ), Entity( 10 ), Entity( 16 ), Entity( 5 ), Entity( 21 ) } );
+    auto result = Entity(24);
+    EXPECT_NO_THROW( result = entities.FindLast( []( const Entity& e )->bool {return e.i % 20 == 0; } ) );
+    ASSERT_TRUE( result == Entity() );
+}
+
+
 TEST_F( ExtendedVectorTest, RemoveItemOfCustomType )
 {
     class Entity

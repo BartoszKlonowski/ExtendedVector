@@ -207,6 +207,16 @@ namespace Cx
         }
 
 
+        T FindLast( std::function<bool( T )> predicate ) const noexcept
+        {
+            auto resultInstance = T();
+            for( auto it = this->cbegin(); it != this->cend(); ++it )
+                if( predicate( *it ) )
+                    resultInstance = *it;
+            return resultInstance;
+        }
+
+
     private:
         const int BinarySearchGenericImplementation( T item, std::function<bool( T )> predicate, const unsigned int start, const unsigned int count )
         {
