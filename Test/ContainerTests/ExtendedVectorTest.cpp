@@ -521,3 +521,91 @@ TEST_F( ExtendedVectorTest, RemoveItemOfCustomType )
     ASSERT_TRUE( entities[2] == Entity( 1 ) );
     ASSERT_TRUE( entities[3] == Entity( 7 ) );
 }
+
+
+TEST_F( ExtendedVectorTest, IndexOfSuccessForBasicTypeElement )
+{
+    vector.AddRange( { 1,2,3,4,5,6,7,8,9 } );
+    constexpr int expected = 6;
+    int result = -1;
+    EXPECT_NO_THROW( result = vector.IndexOf( 7 ) );
+    ASSERT_TRUE( result == expected );
+}
+
+TEST_F( ExtendedVectorTest, IndexOfSuccessForCustomTypeElement )
+{
+    class Entity
+    {
+    public:
+        Entity( int i ) : i{ i } {}
+        int i;
+        const bool operator==( const Entity e ) const { return e.i == this->i; }
+    };
+    Vector<Entity> entities;
+    entities.AddRange( { Entity( 2 ), Entity( 4 ), Entity( 8 ), Entity( 1 ), Entity( 8 ), Entity( 7 ) } );
+    constexpr int expected = 3;
+    int result = -1;
+    EXPECT_NO_THROW( result = entities.IndexOf( Entity(1) ) );
+    ASSERT_TRUE( result == expected );
+}
+
+TEST_F( ExtendedVectorTest, IndexOfFailsWhenNoSuchElement )
+{
+    vector.AddRange( { 1,2,3,4,6,7,8,9 } );
+    constexpr int expected = -1;
+    int result = 10;
+    EXPECT_NO_THROW( result = vector.IndexOf( 5 ) );
+    ASSERT_TRUE( result == expected );
+}
+
+TEST_F( ExtendedVectorTest, IndexOfWithSpecificStartSuccessForBasicTypeElement )
+{
+    vector.AddRange( { 1,2,3,4,5,6,7,8,9 } );
+    constexpr int expected = 6;
+    int result = -1;
+    EXPECT_NO_THROW( result = vector.IndexOf( 7, 4 ) );
+    ASSERT_TRUE( result == expected );
+}
+
+TEST_F( ExtendedVectorTest, IndexOfWithSpecificStartSuccessForCustomTypeElement )
+{
+    class Entity
+    {
+    public:
+        Entity( int i ) : i{ i } {}
+        int i;
+        const bool operator==( const Entity e ) const { return e.i == this->i; }
+    };
+    Vector<Entity> entities;
+    entities.AddRange( { Entity( 2 ), Entity( 4 ), Entity( 8 ), Entity( 1 ), Entity( 8 ), Entity( 7 ) } );
+    constexpr int expected = 3;
+    int result = -1;
+    EXPECT_NO_THROW( result = entities.IndexOf( Entity( 1 ), 1 ) );
+    ASSERT_TRUE( result == expected );
+}
+
+TEST_F( ExtendedVectorTest, IndexOfWithSpecificStartAndCountSuccessForBasicTypeElement )
+{
+    vector.AddRange( { 1,2,3,4,5,6,7,8,9 } );
+    constexpr int expected = 6;
+    int result = -1;
+    EXPECT_NO_THROW( result = vector.IndexOf( 7, 4, 4 ) );
+    ASSERT_TRUE( result == expected );
+}
+
+TEST_F( ExtendedVectorTest, IndexOfWithSpecificStartAndCountSuccessForCustomTypeElement )
+{
+    class Entity
+    {
+    public:
+        Entity( int i ) : i{ i } {}
+        int i;
+        const bool operator==( const Entity e ) const { return e.i == this->i; }
+    };
+    Vector<Entity> entities;
+    entities.AddRange( { Entity( 2 ), Entity( 4 ), Entity( 8 ), Entity( 1 ), Entity( 8 ), Entity( 7 ) } );
+    constexpr int expected = 3;
+    int result = -1;
+    EXPECT_NO_THROW( result = entities.IndexOf( Entity( 1 ), 2, 2 ) );
+    ASSERT_TRUE( result == expected );
+}
