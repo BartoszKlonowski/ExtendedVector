@@ -262,6 +262,43 @@ namespace Cx
         }
 
 
+        const int FindIndex( std::function<bool(T)> predicate ) const
+        {
+            try
+            {
+                return FindIndexGenericImplementation( predicate, 0, this->size() );
+            }
+            catch( const std::exception& e )
+            {
+                throw e;
+            }
+        }
+
+        const int FindIndex( std::function<bool( T )> predicate, const unsigned int start ) const
+        {
+            try
+            {
+                return FindIndexGenericImplementation( predicate, start, this->size() - start );
+            }
+            catch( const std::exception& e )
+            {
+                throw e;
+            }
+        }
+
+        const int FindIndex( std::function<bool( T )> predicate, const unsigned int start, const unsigned int count ) const
+        {
+            try
+            {
+                return FindIndexGenericImplementation( predicate, start, count );
+            }
+            catch( const std::exception& e )
+            {
+                throw e;
+            }
+        }
+
+
     private:
         const int BinarySearchGenericImplementation( T item, std::function<bool( T )> predicate, const unsigned int start, const unsigned int count )
         {
@@ -290,6 +327,18 @@ namespace Cx
             constexpr int result = -1;
             for( unsigned int index = start; index < start + count; ++index )
                 if( this->operator[]( index ) == item )
+                    return index;
+            return result;
+        }
+
+
+        const int FindIndexGenericImplementation( std::function<bool(T)> predicate, const unsigned int start, const unsigned int count ) const
+        {
+            if( start + count > this->size() )
+                throw std::invalid_argument( "search range exceeds containers size" );
+            constexpr int result = -1;
+            for( unsigned int index = start; index < start + count; ++index )
+                if( predicate( this->operator[]( index ) ) )
                     return index;
             return result;
         }
