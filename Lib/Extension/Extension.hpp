@@ -217,6 +217,14 @@ namespace Cx
         }
 
 
+        void RemoveRange( const unsigned int start, const unsigned int count )
+        {
+            if( start + count > this->size() )
+                throw std::invalid_argument( "range exceeds the container size" );
+            this->erase( this->cbegin() + start, this->cbegin() + start + count );
+        }
+
+
     private:
         const int BinarySearchGenericImplementation( T item, std::function<bool( T )> predicate, const unsigned int start, const unsigned int count )
         {

@@ -462,6 +462,43 @@ TEST_F( ExtendedVectorTest, FindLastFailForCustomElementWhenNoSuchElement )
 }
 
 
+TEST_F( ExtendedVectorTest, RemoveRangeSuccessForBasicType )
+{
+    vector.AddRange( { 1,2,3,4,5,6,7,8,9 } );
+    EXPECT_NO_THROW( vector.RemoveRange( 3, 3 ) );
+    ASSERT_TRUE( vector[0] == 1 );
+    ASSERT_TRUE( vector[1] == 2 );
+    ASSERT_TRUE( vector[2] == 3 );
+    ASSERT_TRUE( vector[3] == 7 );
+    ASSERT_TRUE( vector[4] == 8 );
+}
+
+TEST_F( ExtendedVectorTest, RemoveRangeFails )
+{
+    vector.AddRange( { 1,2,3,4,5,6,7,8,9 } );
+    EXPECT_THROW( vector.RemoveRange( 5, 6 ), std::invalid_argument );
+}
+
+TEST_F( ExtendedVectorTest, RemoveRangeSuccessForCustomType )
+{
+    class Entity
+    {
+    public:
+        Entity( int i ) : i{ i } {}
+        int i;
+        const bool operator==( const Entity& e ) const { return e.i == this->i; }
+    };
+
+    Vector<Entity> entities;
+    entities.AddRange( { Entity( 1 ),Entity( 2 ), Entity( 3 ), Entity( 4 ), Entity( 5 ), Entity( 6 ) } );
+    EXPECT_NO_THROW( entities.RemoveRange( 3, 2 ) );
+    ASSERT_TRUE( entities[0] == Entity(1) );
+    ASSERT_TRUE( entities[1] == Entity(2) );
+    ASSERT_TRUE( entities[2] == Entity(3) );
+    ASSERT_TRUE( entities[3] == Entity(6) );
+}
+
+
 TEST_F( ExtendedVectorTest, RemoveItemOfCustomType )
 {
     class Entity
