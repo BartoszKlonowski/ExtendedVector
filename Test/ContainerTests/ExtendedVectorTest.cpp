@@ -697,3 +697,66 @@ TEST_F( ExtendedVectorTest, FindIndexWithSpecificStartAndCountSuccessForCustomTy
     EXPECT_NO_THROW( result = entities.FindIndex( []( const Entity& e )->bool {return e == Entity( 1 ); }, 2, 2 ) );
     ASSERT_TRUE( result == expected );
 }
+
+
+TEST_F( ExtendedVectorTest, SwapFullScopeOfContainerForOddNumberOfElementsInContainer )
+{
+    vector.AddRange( { 1,2,3,4,5,6,7,8,9 } );
+    EXPECT_NO_THROW( vector.Reverse() );
+    ASSERT_TRUE( vector[0] == 9 );
+    ASSERT_TRUE( vector[1] == 8 );
+    ASSERT_TRUE( vector[2] == 7 );
+    ASSERT_TRUE( vector[3] == 6 );
+    ASSERT_TRUE( vector[4] == 5 );
+    ASSERT_TRUE( vector[5] == 4 );
+    ASSERT_TRUE( vector[6] == 3 );
+    ASSERT_TRUE( vector[7] == 2 );
+    ASSERT_TRUE( vector[8] == 1 );
+}
+
+TEST_F( ExtendedVectorTest, SwapFullScopeOfContainerForEvenNumberOfElementsInContainer )
+{
+    vector.AddRange( { 1,2,3,4,5,6,7,8,9,10 } );
+    EXPECT_NO_THROW( vector.Reverse() );
+    ASSERT_TRUE( vector[0] == 10 );
+    ASSERT_TRUE( vector[1] == 9 );
+    ASSERT_TRUE( vector[2] == 8 );
+    ASSERT_TRUE( vector[3] == 7 );
+    ASSERT_TRUE( vector[4] == 6 );
+    ASSERT_TRUE( vector[5] == 5 );
+    ASSERT_TRUE( vector[6] == 4 );
+    ASSERT_TRUE( vector[7] == 3 );
+    ASSERT_TRUE( vector[8] == 2 );
+    ASSERT_TRUE( vector[9] == 1 );
+}
+
+TEST_F( ExtendedVectorTest, SwapRangeInContainerForOddNumberOfElementsInContainer )
+{
+    vector.AddRange( { 1,2,3,4,5,6,7,8,9 } );
+    EXPECT_NO_THROW( vector.Reverse(2,4) );
+    ASSERT_TRUE( vector[0] == 1 );
+    ASSERT_TRUE( vector[1] == 2 );
+    ASSERT_TRUE( vector[2] == 6 );
+    ASSERT_TRUE( vector[3] == 5 );
+    ASSERT_TRUE( vector[4] == 4 );
+    ASSERT_TRUE( vector[5] == 3 );
+    ASSERT_TRUE( vector[6] == 7 );
+    ASSERT_TRUE( vector[7] == 8 );
+    ASSERT_TRUE( vector[8] == 9 );
+}
+
+TEST_F( ExtendedVectorTest, SwapRangeInContainerForEvenNumberOfElementsInContainer )
+{
+    vector.AddRange( { 1,2,3,4,5,6,7,8,9,10 } );
+    EXPECT_NO_THROW( vector.Reverse(4,2) );
+    ASSERT_TRUE( vector[0] == 1 );
+    ASSERT_TRUE( vector[1] == 2 );
+    ASSERT_TRUE( vector[2] == 3 );
+    ASSERT_TRUE( vector[3] == 4 );
+    ASSERT_TRUE( vector[4] == 6 );
+    ASSERT_TRUE( vector[5] == 5 );
+    ASSERT_TRUE( vector[6] == 7 );
+    ASSERT_TRUE( vector[7] == 8 );
+    ASSERT_TRUE( vector[8] == 9 );
+    ASSERT_TRUE( vector[9] == 10 );
+}

@@ -299,6 +299,22 @@ namespace Cx
         }
 
 
+        void Reverse() noexcept
+        {
+            const auto swapRange = static_cast<int>(this->size() / 2);
+            for( auto swappedIndex = 0; swappedIndex < swapRange; ++swappedIndex )
+                std::swap( this->operator[](swappedIndex), this->operator[](this->size() - 1 - swappedIndex) );
+        }
+
+        void Reverse( const unsigned int start, const unsigned int count )
+        {
+            if( start + count >= this->size() )
+                throw std::invalid_argument( "reverse range exceeds container size" );
+            for( unsigned int swappedIndex = 0; swappedIndex < count / 2; ++swappedIndex )
+                std::swap( this->operator[]( swappedIndex + start ), this->operator[]( start + count - swappedIndex - 1 ) );
+        }
+
+
     private:
         const int BinarySearchGenericImplementation( T item, std::function<bool( T )> predicate, const unsigned int start, const unsigned int count )
         {
