@@ -760,3 +760,110 @@ TEST_F( ExtendedVectorTest, SwapRangeInContainerForEvenNumberOfElementsInContain
     ASSERT_TRUE( vector[8] == 9 );
     ASSERT_TRUE( vector[9] == 10 );
 }
+
+
+TEST_F( ExtendedVectorTest, FindLastIndexSuccessForFullContainerRange )
+{
+    vector.AddRange( { 1,3,2,3,5,67,3,2,54,3,12 } );
+    int result = 0;
+    EXPECT_NO_THROW( result = vector.FindLastIndex( []( const int& element )->bool
+        {
+            return element == 3;
+        } ) );
+    ASSERT_TRUE( result != 0 );
+    ASSERT_TRUE( result == 9 );
+}
+
+TEST_F( ExtendedVectorTest, FindLastIndexFailsForFullContainerRange )
+{
+    vector.AddRange( { 1,3,2,3,5,67,3,2,54,3,12 } );
+    int result = 0;
+    EXPECT_NO_THROW( result = vector.FindLastIndex( []( const int& element )->bool
+        {
+            return element == 15;
+        } ) );
+    ASSERT_TRUE( result != 0 );
+    ASSERT_TRUE( result == -1 );
+}
+
+TEST_F( ExtendedVectorTest, FindLastIndexSuccessForContainerRangeLimitedByEndIndex )
+{
+    vector.AddRange( { 1,3,2,3,5,67,3,2,54,3,12 } );
+    int result = 0;
+    EXPECT_NO_THROW( result = vector.FindLastIndex( 4, []( const int& element )->bool
+        {
+            return element == 3;
+        } ) );
+    ASSERT_TRUE( result != 0 );
+    ASSERT_TRUE( result == 3 );
+}
+
+TEST_F( ExtendedVectorTest, FindLastIndexFailsForContainerRangeLimitedByEndIndex )
+{
+    vector.AddRange( { 1,3,2,3,5,67,3,2,54,3,12 } );
+    int result = 0;
+    EXPECT_NO_THROW( result = vector.FindLastIndex( 4, []( const int& element )->bool
+        {
+            return element == 67;
+        } ) );
+    ASSERT_TRUE( result != 0 );
+    ASSERT_TRUE( result == -1 );
+}
+
+TEST_F( ExtendedVectorTest, FindLastIndexSuccessForContainerRangeLimitedByStartEndIndex )
+{
+    vector.AddRange( { 1,3,2,3,5,67,3,2,54,3,12 } );
+    int result = 0;
+    EXPECT_NO_THROW( result = vector.FindLastIndex( 3, 8, []( const int& element )->bool
+        {
+            return element == 15;
+        } ) );
+    ASSERT_TRUE( result != 0 );
+    ASSERT_TRUE( result == -1 );
+}
+
+TEST_F( ExtendedVectorTest, FindLastIndexFailsForContainerRangeLimitedByStartEndIndex )
+{
+    vector.AddRange( { 1,3,2,3,5,67,3,2,54,3,12 } );
+    int result = 0;
+    EXPECT_NO_THROW( result = vector.FindLastIndex( []( const int& element )->bool
+        {
+            return element == 15;
+        } ) );
+    ASSERT_TRUE( result != 0 );
+    ASSERT_TRUE( result == -1 );
+}
+
+TEST_F( ExtendedVectorTest, FindLastIndexThrowsForContainerRangeLimitedByEndIndex )
+{
+    vector.AddRange( { 1,3,2,3,5,67,3,2,54,3,12 } );
+    int result = 0;
+    EXPECT_THROW( result = vector.FindLastIndex( 50, []( const int& element )->bool
+        {
+            return element == 15;
+        } ),
+        std::invalid_argument );
+    ASSERT_TRUE( result == 0 );
+}
+
+TEST_F( ExtendedVectorTest, FindLastIndexThrowsForContainerRangeLimitedByStartEndIndex )
+{
+    vector.AddRange( { 1,3,2,3,5,67,3,2,54,3,12 } );
+    int result = 0;
+    EXPECT_THROW( result = vector.FindLastIndex( 6, 20, []( const int& element )->bool
+        {
+            return element == 15;
+        } ),
+        std::invalid_argument );
+    EXPECT_THROW( result = vector.FindLastIndex( 15, 25, []( const int& element )->bool
+        {
+            return element == 15;
+        } ),
+        std::invalid_argument );
+    EXPECT_THROW( result = vector.FindLastIndex( 5, 2, []( const int& element )->bool
+        {
+            return element == 15;
+        } ),
+        std::invalid_argument );
+    ASSERT_TRUE( result == 0 );
+}

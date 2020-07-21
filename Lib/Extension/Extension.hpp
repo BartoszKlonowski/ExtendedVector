@@ -315,6 +315,44 @@ namespace Cx
         }
 
 
+        const int FindLastIndex( std::function<bool( T )> predicate ) const noexcept
+        {
+            int index = 0;
+            int lastIndex = -1;
+            for( auto it = this->cbegin(); it != this->cend(); ++it, ++index )
+                if( predicate( *it ) )
+                    lastIndex = index;
+            return lastIndex;
+        }
+
+        const int FindLastIndex( const unsigned int end, std::function<bool( T )> predicate ) const
+        {
+            if( end >= this->size() )
+                throw std::invalid_argument( "Ending index exceeds container size" );
+            int lastIndex = -1;
+            int index = 0;
+            for( auto it = this->cbegin(); it != this->cbegin() + end; ++it, ++index )
+                if( predicate( *it ) )
+                    lastIndex = index;
+            return lastIndex;
+        }
+
+        const int FindLastIndex( const unsigned int start, const unsigned int end, std::function<bool( T )> predicate ) const
+        {
+            if( start > end )
+                throw std::invalid_argument( "starting index bigger than ending index of search range" );
+            else if( end >= this->size() )
+                throw std::invalid_argument( "ending index exceeds container size" );
+            else if( start >= this->size() )
+                throw std::invalid_argument( "starting index is beyond the container size" );
+            int lastIndex = -1;
+            int index = 0;
+            for( auto it = this->cbegin() + start; it != this->cbegin() + end; ++it, ++index )
+                if( predicate( *it ) )
+                    lastIndex = index;
+            return lastIndex;
+        }
+
     private:
         const int BinarySearchGenericImplementation( T item, std::function<bool( T )> predicate, const unsigned int start, const unsigned int count )
         {
