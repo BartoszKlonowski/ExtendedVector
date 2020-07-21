@@ -699,7 +699,7 @@ TEST_F( ExtendedVectorTest, FindIndexWithSpecificStartAndCountSuccessForCustomTy
 }
 
 
-TEST_F( ExtendedVectorTest, SwapFullScopeOfContainerForOddNumberOfElementsInContainer )
+TEST_F( ExtendedVectorTest, ReverseFullScopeOfContainerForOddNumberOfElementsInContainer )
 {
     vector.AddRange( { 1,2,3,4,5,6,7,8,9 } );
     EXPECT_NO_THROW( vector.Reverse() );
@@ -714,7 +714,7 @@ TEST_F( ExtendedVectorTest, SwapFullScopeOfContainerForOddNumberOfElementsInCont
     ASSERT_TRUE( vector[8] == 1 );
 }
 
-TEST_F( ExtendedVectorTest, SwapFullScopeOfContainerForEvenNumberOfElementsInContainer )
+TEST_F( ExtendedVectorTest, ReverseFullScopeOfContainerForEvenNumberOfElementsInContainer )
 {
     vector.AddRange( { 1,2,3,4,5,6,7,8,9,10 } );
     EXPECT_NO_THROW( vector.Reverse() );
@@ -730,7 +730,7 @@ TEST_F( ExtendedVectorTest, SwapFullScopeOfContainerForEvenNumberOfElementsInCon
     ASSERT_TRUE( vector[9] == 1 );
 }
 
-TEST_F( ExtendedVectorTest, SwapRangeInContainerForOddNumberOfElementsInContainer )
+TEST_F( ExtendedVectorTest, ReverseRangeInContainerForOddNumberOfElementsInContainer )
 {
     vector.AddRange( { 1,2,3,4,5,6,7,8,9 } );
     EXPECT_NO_THROW( vector.Reverse(2,4) );
@@ -745,7 +745,7 @@ TEST_F( ExtendedVectorTest, SwapRangeInContainerForOddNumberOfElementsInContaine
     ASSERT_TRUE( vector[8] == 9 );
 }
 
-TEST_F( ExtendedVectorTest, SwapRangeInContainerForEvenNumberOfElementsInContainer )
+TEST_F( ExtendedVectorTest, ReverseRangeInContainerForEvenNumberOfElementsInContainer )
 {
     vector.AddRange( { 1,2,3,4,5,6,7,8,9,10 } );
     EXPECT_NO_THROW( vector.Reverse(4,2) );
