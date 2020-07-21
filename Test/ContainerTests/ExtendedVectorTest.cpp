@@ -761,6 +761,12 @@ TEST_F( ExtendedVectorTest, SwapRangeInContainerForEvenNumberOfElementsInContain
     ASSERT_TRUE( vector[9] == 10 );
 }
 
+TEST_F( ExtendedVectorTest, ReverseThrowsExceptionWhenExceedingContainerSize )
+{
+    vector.AddRange( { 1,2,3,4,5,6,7 } );
+    EXPECT_THROW( vector.Reverse( 3, 5 ), std::invalid_argument );
+}
+
 
 TEST_F( ExtendedVectorTest, FindLastIndexSuccessForFullContainerRange )
 {
