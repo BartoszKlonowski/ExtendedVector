@@ -388,6 +388,18 @@ namespace Cx
             catch( std::invalid_argument& e ) { throw e; }
         }
 
+
+        ExtendedVector<T> GetRange( const unsigned int start, const unsigned int end ) const
+        {
+            if( start >= this->size() || end >= this->size() || start >= end )
+                throw std::invalid_argument( "Incorrect range tresholds were given" );
+            ExtendedVector<T> newVector;
+            for( auto it = this->cbegin() + start; it != this->cbegin() + end; ++it )
+                newVector.push_back( *it );
+            return newVector;
+        }
+
+
     private:
         const int BinarySearchGenericImplementation( T item, std::function<bool( T )> predicate, const unsigned int start, const unsigned int count )
         {

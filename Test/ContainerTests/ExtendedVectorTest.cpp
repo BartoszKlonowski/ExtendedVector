@@ -982,3 +982,26 @@ TEST_F( ExtendedVectorTest, InsertRangeSuccessForDataAsRValueCxVector )
     ASSERT_TRUE( vector[12] == 8 );
     ASSERT_TRUE( vector[13] == 9 );
 }
+
+
+TEST_F( ExtendedVectorTest, GetRangeSuccessForCorrectRange )
+{
+    vector.AddRange( { 1,2,3,4,5,6,7,8,9 } );
+    Cx::ExtendedVector<int> range;
+    EXPECT_NO_THROW( range = vector.GetRange( 3, 7 ) );
+    ASSERT_TRUE( range[0] == 4 );
+    ASSERT_TRUE( range[1] == 5 );
+    ASSERT_TRUE( range[2] == 6 );
+    ASSERT_TRUE( range[3] == 7 );
+    ASSERT_TRUE( range.size() == (7 - 3) );
+}
+
+TEST_F( ExtendedVectorTest, GetRangeFailsForIncorrectRange )
+{
+    vector.AddRange( { 1,2,3,4,5,6,7,8,9 } );
+    Cx::ExtendedVector<int> range;
+    EXPECT_THROW( range = vector.GetRange( 3, 20 ), std::invalid_argument );
+    EXPECT_THROW( range = vector.GetRange( 11, 15 ), std::invalid_argument );
+    EXPECT_THROW( range = vector.GetRange( 5, 2 ), std::invalid_argument );
+    ASSERT_TRUE( range.size() == 0 );
+}
