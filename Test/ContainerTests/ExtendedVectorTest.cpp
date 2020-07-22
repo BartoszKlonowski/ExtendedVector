@@ -873,3 +873,112 @@ TEST_F( ExtendedVectorTest, FindLastIndexThrowsForContainerRangeLimitedByStartEn
         std::invalid_argument );
     ASSERT_TRUE( result == 0 );
 }
+
+
+TEST_F( ExtendedVectorTest, InsertRangeSuccessForDataAsArray )
+{
+    vector.AddRange( { 1,2,3,4,5,6,7,8,9 } );
+    constexpr unsigned int dataSize = 5;
+    int range[dataSize] = { 10,20,30,40,50 };
+    EXPECT_NO_THROW( vector.InsertRange( 3, range, dataSize ) );
+    ASSERT_TRUE( vector[0] == 1 );
+    ASSERT_TRUE( vector[1] == 2 );
+    ASSERT_TRUE( vector[2] == 3 );
+    ASSERT_TRUE( vector[3] == 10 );
+    ASSERT_TRUE( vector[4] == 20 );
+    ASSERT_TRUE( vector[5] == 30 );
+    ASSERT_TRUE( vector[6] == 40 );
+    ASSERT_TRUE( vector[7] == 50 );
+    ASSERT_TRUE( vector[8] == 4 );
+    ASSERT_TRUE( vector[9] == 5 );
+    ASSERT_TRUE( vector[10] == 6 );
+    ASSERT_TRUE( vector[11] == 7 );
+    ASSERT_TRUE( vector[12] == 8 );
+    ASSERT_TRUE( vector[13] == 9 );
+}
+
+TEST_F( ExtendedVectorTest, InsertRangeSuccessForDataAsLValueStdVector )
+{
+    vector.AddRange( { 1,2,3,4,5,6,7,8,9 } );
+    std::vector<int> range = { 10,20,30,40,50 };
+    EXPECT_NO_THROW( vector.InsertRange( 3, range ) );
+    ASSERT_TRUE( vector[0] == 1 );
+    ASSERT_TRUE( vector[1] == 2 );
+    ASSERT_TRUE( vector[2] == 3 );
+    ASSERT_TRUE( vector[3] == 10 );
+    ASSERT_TRUE( vector[4] == 20 );
+    ASSERT_TRUE( vector[5] == 30 );
+    ASSERT_TRUE( vector[6] == 40 );
+    ASSERT_TRUE( vector[7] == 50 );
+    ASSERT_TRUE( vector[8] == 4 );
+    ASSERT_TRUE( vector[9] == 5 );
+    ASSERT_TRUE( vector[10] == 6 );
+    ASSERT_TRUE( vector[11] == 7 );
+    ASSERT_TRUE( vector[12] == 8 );
+    ASSERT_TRUE( vector[13] == 9 );
+}
+
+TEST_F( ExtendedVectorTest, InsertRangeSuccessForDataAsRValueStdVector )
+{
+    vector.AddRange( { 1,2,3,4,5,6,7,8,9 } );
+    std::vector<int> range = { 10,20,30,40,50 };
+    EXPECT_NO_THROW( vector.InsertRange( 3, std::move(range) ) );
+    ASSERT_TRUE( vector[0] == 1 );
+    ASSERT_TRUE( vector[1] == 2 );
+    ASSERT_TRUE( vector[2] == 3 );
+    ASSERT_TRUE( vector[3] == 10 );
+    ASSERT_TRUE( vector[4] == 20 );
+    ASSERT_TRUE( vector[5] == 30 );
+    ASSERT_TRUE( vector[6] == 40 );
+    ASSERT_TRUE( vector[7] == 50 );
+    ASSERT_TRUE( vector[8] == 4 );
+    ASSERT_TRUE( vector[9] == 5 );
+    ASSERT_TRUE( vector[10] == 6 );
+    ASSERT_TRUE( vector[11] == 7 );
+    ASSERT_TRUE( vector[12] == 8 );
+    ASSERT_TRUE( vector[13] == 9 );
+}
+
+TEST_F( ExtendedVectorTest, InsertRangeSuccessForDataAsLValueCxVector )
+{
+    vector.AddRange( { 1,2,3,4,5,6,7,8,9 } );
+    Vector<int> range;
+    range.AddRange({ 10,20,30,40,50 });
+    EXPECT_NO_THROW( vector.InsertRange( 3, range ) );
+    ASSERT_TRUE( vector[0] == 1 );
+    ASSERT_TRUE( vector[1] == 2 );
+    ASSERT_TRUE( vector[2] == 3 );
+    ASSERT_TRUE( vector[3] == 10 );
+    ASSERT_TRUE( vector[4] == 20 );
+    ASSERT_TRUE( vector[5] == 30 );
+    ASSERT_TRUE( vector[6] == 40 );
+    ASSERT_TRUE( vector[7] == 50 );
+    ASSERT_TRUE( vector[8] == 4 );
+    ASSERT_TRUE( vector[9] == 5 );
+    ASSERT_TRUE( vector[10] == 6 );
+    ASSERT_TRUE( vector[11] == 7 );
+    ASSERT_TRUE( vector[12] == 8 );
+    ASSERT_TRUE( vector[13] == 9 );
+}
+
+TEST_F( ExtendedVectorTest, InsertRangeSuccessForDataAsRValueCxVector )
+{
+    vector.AddRange( { 1,2,3,4,5,6,7,8,9 } );
+    Vector<int> range;
+    range.AddRange( { 10,20,30,40,50 } );
+    EXPECT_NO_THROW( vector.InsertRange( 3, std::move(range) ) );
+    ASSERT_TRUE( vector[0] == 1 );
+    ASSERT_TRUE( vector[1] == 2 );
+    ASSERT_TRUE( vector[2] == 3 );
+    ASSERT_TRUE( vector[3] == 10 );
+    ASSERT_TRUE( vector[4] == 20 );
+    ASSERT_TRUE( vector[5] == 30 );
+    ASSERT_TRUE( vector[6] == 40 );
+    ASSERT_TRUE( vector[7] == 50 );
+    ASSERT_TRUE( vector[8] == 4 );
+    ASSERT_TRUE( vector[9] == 5 );
+    ASSERT_TRUE( vector[10] == 6 );
+    ASSERT_TRUE( vector[11] == 7 );
+    ASSERT_TRUE( vector[12] == 8 );
+    ASSERT_TRUE( vector[13] == 9 );
+}

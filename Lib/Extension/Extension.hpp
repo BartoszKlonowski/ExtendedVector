@@ -353,6 +353,41 @@ namespace Cx
             return lastIndex;
         }
 
+
+        void InsertRange( const unsigned int index, const T* const range, const unsigned int n )
+        {
+            if( range == nullptr )
+                throw std::invalid_argument( "range is nullptr" );
+            else if( index > this->size() )
+                throw std::invalid_argument( "insertion index beyond container size" );
+            for( auto i = 0u; i < n; ++i )
+                this->insert( this->cbegin() + index + i, range[i] );
+        }
+
+        void InsertRange( const unsigned int index, const std::vector<T>& range )
+        {
+            try { InsertRange( index, range.data(), range.size() ); }
+            catch( std::invalid_argument& e ) { throw e; }
+        }
+
+        void InsertRange( const unsigned int index, std::vector<T>&& range )
+        {
+            try { InsertRange( index, range.data(), range.size() ); }
+            catch( std::invalid_argument& e ) { throw e; }
+        }
+
+        void InsertRange( const unsigned int index, const ExtendedVector<T>& range )
+        {
+            try { InsertRange( index, range.data(), range.size() ); }
+            catch( std::invalid_argument& e ) { throw e; }
+        }
+
+        void InsertRange( const unsigned int index, ExtendedVector<T>&& range )
+        {
+            try { InsertRange( index, range.data(), range.size() ); }
+            catch( std::invalid_argument& e ) { throw e; }
+        }
+
     private:
         const int BinarySearchGenericImplementation( T item, std::function<bool( T )> predicate, const unsigned int start, const unsigned int count )
         {
