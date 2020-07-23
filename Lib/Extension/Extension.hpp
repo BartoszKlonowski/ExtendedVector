@@ -400,6 +400,23 @@ namespace Cx
         }
 
 
+        const int LastIndexOf( T item ) const noexcept
+        {
+            return LastIndexOfGenericImplementation( item, 0, this->size() );
+        }
+
+        const int LastIndexOf( T item, const unsigned int index )
+        {
+            return LastIndexOfGenericImplementation( item, 0, index );
+        }
+
+        const int LastIndexOf( T item, const unsigned int index, const unsigned int count )
+        {
+            return LastIndexOfGenericImplementation( item, index, count );
+        }
+
+
+
     private:
         const int BinarySearchGenericImplementation( T item, std::function<bool( T )> predicate, const unsigned int start, const unsigned int count )
         {
@@ -430,6 +447,19 @@ namespace Cx
                 if( this->operator[]( index ) == item )
                     return index;
             return result;
+        }
+
+
+        const int LastIndexOfGenericImplementation( T item, const unsigned int start, const unsigned int count ) const
+        {
+            if( start + count > this->size() )
+                throw std::invalid_argument( "search range exceeds containers size" );
+            int lastIndex = -1;
+            int index = 0;
+            for( auto it = this->cbegin() + start; it != this->cbegin() + (start + count); ++it, ++index )
+                if( *it == item )
+                    lastIndex = index;
+            return lastIndex;
         }
 
 

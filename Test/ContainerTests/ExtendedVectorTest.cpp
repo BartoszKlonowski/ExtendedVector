@@ -1005,3 +1005,75 @@ TEST_F( ExtendedVectorTest, GetRangeFailsForIncorrectRange )
     EXPECT_THROW( range = vector.GetRange( 5, 2 ), std::invalid_argument );
     ASSERT_TRUE( range.size() == 0 );
 }
+
+
+TEST_F( ExtendedVectorTest, LastIndexOfSuccessForFullContainerRange )
+{
+    vector.AddRange( { 1,3,2,3,5,67,3,2,54,3,12 } );
+    int result = 0;
+    EXPECT_NO_THROW( result = vector.LastIndexOf( 3 ) );
+    ASSERT_TRUE( result != 0 );
+    ASSERT_TRUE( result == 9 );
+}
+
+TEST_F( ExtendedVectorTest, LastIndexOfFailsForFullContainerRange )
+{
+    vector.AddRange( { 1,3,2,3,5,67,3,2,54,3,12 } );
+    int result = 0;
+    EXPECT_NO_THROW( result = vector.LastIndexOf( 15 ) );
+    ASSERT_TRUE( result != 0 );
+    ASSERT_TRUE( result == -1 );
+}
+
+TEST_F( ExtendedVectorTest, LastIndexOfSuccessForContainerRangeLimitedByEndIndex )
+{
+    vector.AddRange( { 1,3,2,3,5,67,3,2,54,3,12 } );
+    int result = 0;
+    EXPECT_NO_THROW( result = vector.LastIndexOf( 3, 4 ) );
+    ASSERT_TRUE( result != 0 );
+    ASSERT_TRUE( result == 3 );
+}
+
+TEST_F( ExtendedVectorTest, LastIndexOfFailsForContainerRangeLimitedByEndIndex )
+{
+    vector.AddRange( { 1,3,2,3,5,67,3,2,54,3,12 } );
+    int result = 0;
+    EXPECT_NO_THROW( result = vector.LastIndexOf( 67, 4 ) );
+    ASSERT_TRUE( result != 0 );
+    ASSERT_TRUE( result == -1 );
+}
+
+TEST_F( ExtendedVectorTest, LastIndexOfSuccessForContainerRangeLimitedByStartEndIndex )
+{
+    vector.AddRange( { 1,3,2,3,5,67,3,2,54,3,12 } );
+    int result = 0;
+    EXPECT_NO_THROW( result = vector.LastIndexOf( 15, 3, 5 ) );
+    ASSERT_TRUE( result != 0 );
+    ASSERT_TRUE( result == -1 );
+}
+
+TEST_F( ExtendedVectorTest, LastIndexOfFailsForContainerRangeLimitedByStartEndIndex )
+{
+    vector.AddRange( { 1,3,2,3,5,67,3,2,54,3,12 } );
+    int result = 0;
+    EXPECT_NO_THROW( result = vector.LastIndexOf( 15, 3, 5 ) );
+    ASSERT_TRUE( result != 0 );
+    ASSERT_TRUE( result == -1 );
+}
+
+TEST_F( ExtendedVectorTest, LastIndexOfThrowsForContainerRangeLimitedByEndIndex )
+{
+    vector.AddRange( { 1,3,2,3,5,67,3,2,54,3,12 } );
+    int result = 0;
+    EXPECT_THROW( result = vector.LastIndexOf( 15, 50 ), std::invalid_argument );
+    ASSERT_TRUE( result == 0 );
+}
+
+TEST_F( ExtendedVectorTest, LastIndexOfThrowsForContainerRangeLimitedByStartEndIndex )
+{
+    vector.AddRange( { 1,3,2,3,5,67,3,2,54,3,12 } );
+    int result = 0;
+    EXPECT_THROW( result = vector.LastIndexOf( 15, 6, 20 ), std::invalid_argument );
+    EXPECT_THROW( result = vector.LastIndexOf( 15, 15, 25 ), std::invalid_argument );
+    ASSERT_TRUE( result == 0 );
+}
