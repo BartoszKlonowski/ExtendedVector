@@ -1077,3 +1077,14 @@ TEST_F( ExtendedVectorTest, LastIndexOfThrowsForContainerRangeLimitedByStartEndI
     EXPECT_THROW( result = vector.LastIndexOf( 15, 15, 25 ), std::invalid_argument );
     ASSERT_TRUE( result == 0 );
 }
+
+
+TEST_F( ExtendedVectorTest, ConvertAllSuccessForBasicType )
+{
+    vector.AddRange( { 1,2,3,4,5,6,7,8,9 } );
+    Cx::ExtendedVector<float> converted;
+    ASSERT_NO_THROW( converted = vector.ConvertAll<float>( []( int item )->float{ return item + 0.5f; } ) );
+    ASSERT_TRUE( converted.size() == vector.size() );
+    for( unsigned int i = 0; i < converted.size(); ++i )
+        ASSERT_TRUE( converted[i] == i + 1.5f );
+}

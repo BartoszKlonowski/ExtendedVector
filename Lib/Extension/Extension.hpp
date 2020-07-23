@@ -416,6 +416,15 @@ namespace Cx
         }
 
 
+        template<class Tout> ExtendedVector<Tout> ConvertAll( std::function<Tout( T )> converter ) const noexcept
+        {
+            ExtendedVector<Tout> convertedContainer;
+            for( auto it = this->cbegin(); it != this->cend(); ++it )
+                convertedContainer.push_back( converter( *it ) );
+            return convertedContainer;
+        }
+
+
 
     private:
         const int BinarySearchGenericImplementation( T item, std::function<bool( T )> predicate, const unsigned int start, const unsigned int count )
