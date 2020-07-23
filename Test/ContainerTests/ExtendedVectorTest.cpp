@@ -1088,3 +1088,24 @@ TEST_F( ExtendedVectorTest, ConvertAllSuccessForBasicType )
     for( unsigned int i = 0; i < converted.size(); ++i )
         ASSERT_TRUE( converted[i] == i + 1.5f );
 }
+
+
+TEST_F( ExtendedVectorTest, RemoveAtSuccessForCorrectIndex )
+{
+    vector.AddRange( { 0,1,2,3,4,5,6,7,8,9 } );
+    ASSERT_TRUE( vector.size() == 10 );
+    ASSERT_TRUE( vector[4] == 4 );
+    ASSERT_NO_THROW( vector.RemoveAt( 4 ) );
+    ASSERT_TRUE( vector.size() == 9 );
+    ASSERT_TRUE( vector[3] == 3 );
+    ASSERT_TRUE( vector[4] == 5 );
+    ASSERT_TRUE( vector[5] == 6 );
+}
+
+TEST_F( ExtendedVectorTest, RemoveAtFailsForIncorrectIndex )
+{
+    vector.AddRange( { 0,1,2,3,4,5,6,7,8,9 } );
+    ASSERT_TRUE( vector.size() == 10 );
+    ASSERT_THROW( vector.RemoveAt( 15 ), std::invalid_argument );
+    ASSERT_TRUE( vector.size() == 10 );
+}

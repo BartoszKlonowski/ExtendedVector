@@ -425,6 +425,14 @@ namespace Cx
         }
 
 
+        void RemoveAt( const unsigned int index )
+        {
+            if( index >= this->size() )
+                throw std::invalid_argument( "index to remove exceeds the container size" );
+            this->erase( this->cbegin() + index );
+        }
+
+
 
     private:
         const int BinarySearchGenericImplementation( T item, std::function<bool( T )> predicate, const unsigned int start, const unsigned int count )
