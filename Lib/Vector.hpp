@@ -13,10 +13,10 @@
 namespace Cx
 {
     template<class T>
-    class ExtendedVector : public VectorContainer<T>
+    class Vector : public VectorContainer<T>
     {
     public:
-        ExtendedVector() = default;
+        Vector() = default;
 
         void AddRange(const std::initializer_list<T>& list) noexcept
         {
@@ -31,13 +31,13 @@ namespace Cx
                     this->push_back(range[i]);
         }
 
-        void AddRange(const ExtendedVector<T>& vector) noexcept
+        void AddRange(const Vector<T>& vector) noexcept
         {
             for(auto element : vector)
                 this->push_back(element);
         }
 
-        void AddRange(ExtendedVector<T>&& vector) noexcept
+        void AddRange(Vector<T>&& vector) noexcept
         {
             for(auto element : vector)
                 this->push_back(element);
@@ -67,7 +67,7 @@ namespace Cx
 
         void Sort( const unsigned int positionBegin, const unsigned int positionEnd )
         {
-            ExtendedVector<T> vector;
+            Vector<T> vector;
             for( unsigned int i = positionBegin; i <= positionEnd; ++i )
                 vector.push_back( this->at(i) );
             try
@@ -97,7 +97,7 @@ namespace Cx
 
         void Sort( const unsigned int positionBegin, const unsigned int positionEnd, std::function<bool( T, T )> comparer )
         {
-            ExtendedVector<T> vector;
+            Vector<T> vector;
             for( unsigned int i = positionBegin; i <= positionEnd; ++i )
                 vector.push_back( this->at( i ) );
             try
@@ -376,24 +376,24 @@ namespace Cx
             catch( std::invalid_argument& e ) { throw e; }
         }
 
-        void InsertRange( const unsigned int index, const ExtendedVector<T>& range )
+        void InsertRange( const unsigned int index, const Vector<T>& range )
         {
             try { InsertRange( index, range.data(), range.size() ); }
             catch( std::invalid_argument& e ) { throw e; }
         }
 
-        void InsertRange( const unsigned int index, ExtendedVector<T>&& range )
+        void InsertRange( const unsigned int index, Vector<T>&& range )
         {
             try { InsertRange( index, range.data(), range.size() ); }
             catch( std::invalid_argument& e ) { throw e; }
         }
 
 
-        ExtendedVector<T> GetRange( const unsigned int start, const unsigned int end ) const
+        Vector<T> GetRange( const unsigned int start, const unsigned int end ) const
         {
             if( start >= this->size() || end >= this->size() || start >= end )
                 throw std::invalid_argument( "Incorrect range tresholds were given" );
-            ExtendedVector<T> newVector;
+            Vector<T> newVector;
             for( auto it = this->cbegin() + start; it != this->cbegin() + end; ++it )
                 newVector.push_back( *it );
             return newVector;
@@ -416,9 +416,9 @@ namespace Cx
         }
 
 
-        template<class Tout> ExtendedVector<Tout> ConvertAll( std::function<Tout( T )> converter ) const noexcept
+        template<class Tout> Vector<Tout> ConvertAll( std::function<Tout( T )> converter ) const noexcept
         {
-            ExtendedVector<Tout> convertedContainer;
+            Vector<Tout> convertedContainer;
             for( auto it = this->cbegin(); it != this->cend(); ++it )
                 convertedContainer.push_back( converter( *it ) );
             return convertedContainer;
