@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Wrapper/Container.hpp"
 #include <memory>
 #include <vector>
 #include <iostream>
@@ -13,10 +12,14 @@
 namespace Cx
 {
     template<class T>
-    class Vector : public VectorContainer<T>
+    class Vector : public std::vector<T>
     {
     public:
-        Vector() = default;
+        Vector() noexcept : std::vector<T>()
+        {}
+
+        Vector( std::initializer_list<T> initialValues ) noexcept : std::vector<T>( initialValues )
+        {}
 
         void AddRange(const std::initializer_list<T>& list) noexcept
         {
