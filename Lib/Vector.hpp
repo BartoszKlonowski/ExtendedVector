@@ -172,7 +172,7 @@ namespace Cx
 
         void RemoveAll( std::function<bool( T )> predicate ) noexcept
         {
-            this->erase( std::remove_if( this->begin(), this->end(), predicate ) );
+            this->erase( std::remove_if( this->begin(), this->end(), predicate ), this->end() );
         }
 
 

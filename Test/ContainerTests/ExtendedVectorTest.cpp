@@ -327,6 +327,7 @@ TEST_F( ExtendedVectorTest, EraseSpecificElementsOfBasicType )
         {
             return element == 12;
         } );
+    ASSERT_TRUE( vector.size() == 4 );
     ASSERT_TRUE( vector[0] == 3 );
     ASSERT_TRUE( vector[1] == 23 );
     ASSERT_TRUE( vector[2] == 43 );
