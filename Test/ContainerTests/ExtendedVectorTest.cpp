@@ -1102,3 +1102,15 @@ TEST_F( ExtendedVectorTest, RemoveAtFailsForIncorrectIndex )
     ASSERT_THROW( vector.RemoveAt( 15 ), std::invalid_argument );
     ASSERT_TRUE( vector.size() == 10 );
 }
+
+
+TEST_F( ExtendedVectorTest, ForEachElementActionIsPerformed )
+{
+    vector.AddRange( { 0,0,0,0,0,0,0,0,0,0 } );
+    int iteration = 0;
+    EXPECT_NO_THROW( vector.ForEach( [&]( int& element )
+        {
+            element += iteration * 2;
+            iteration++;
+        } ) );
+}

@@ -436,6 +436,13 @@ namespace Cx
         }
 
 
+        void ForEach( std::function<void(T&)> action ) noexcept
+        {
+            for( T& element : *this )
+                action( element );
+        }
+
+
 
     private:
         const int BinarySearchGenericImplementation( T item, std::function<bool( T )> predicate, const unsigned int start, const unsigned int count )
