@@ -443,6 +443,16 @@ namespace Cx
         }
 
 
+        Vector<T> FindAll( std::function<bool( T )> predicate ) const noexcept
+        {
+            Vector<T> results;
+            for( auto element : *this )
+                if( predicate( element ) )
+                    results.push_back( element );
+            return results;
+        }
+
+
 
     private:
         const int BinarySearchGenericImplementation( T item, std::function<bool( T )> predicate, const unsigned int start, const unsigned int count )

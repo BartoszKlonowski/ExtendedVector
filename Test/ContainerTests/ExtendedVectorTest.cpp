@@ -1114,3 +1114,24 @@ TEST_F( ExtendedVectorTest, ForEachElementActionIsPerformed )
             iteration++;
         } ) );
 }
+
+
+TEST_F( ExtendedVectorTest, FindAllSuccess )
+{
+    vector.AddRange( { 13,2,14,3,1,15,16,23,24 } );
+    Cx::Vector<int> results;
+    EXPECT_NO_THROW( results = vector.FindAll( []( const int& element )->bool {return element % 2 == 0; } ) );
+    ASSERT_TRUE( results.size() == 4 );
+    ASSERT_TRUE( results[0] == 2 );
+    ASSERT_TRUE( results[1] == 14 );
+    ASSERT_TRUE( results[2] == 16 );
+    ASSERT_TRUE( results[3] == 24 );
+}
+
+TEST_F( ExtendedVectorTest, FindAllFailsByLeavingEmptyDefaultContainer )
+{
+    vector.AddRange( { 13,2,14,3,1,15,16,23,24 } );
+    Cx::Vector<int> results;
+    EXPECT_NO_THROW( results = vector.FindAll( []( const int& element )->bool {return element % 9 == 0; } ) );
+    ASSERT_TRUE( results.size() == 0 );
+}
