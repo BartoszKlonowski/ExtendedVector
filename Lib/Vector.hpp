@@ -21,29 +21,29 @@ namespace Cx
         Vector( std::initializer_list<T> initialValues ) noexcept : std::vector<T>( initialValues )
         {}
 
-        void AddRange(const std::initializer_list<T>& list) noexcept
+        void AddRange( const std::initializer_list<T>& list ) noexcept
         {
-            for(auto element : list)
-                this->push_back(element);
+            for( auto element : list )
+                this->push_back( element );
         }
 
-        void AddRange(const T* const range, const unsigned int size) noexcept
+        void AddRange( const T* const range, const unsigned int size ) noexcept
         {
-            if(range != nullptr)
-                for(unsigned int i = 0; i < size; ++i)
-                    this->push_back(range[i]);
+            if( range != nullptr )
+                for( unsigned int i = 0; i < size; ++i )
+                    this->push_back( range[i] );
         }
 
-        void AddRange(const Vector<T>& vector) noexcept
+        void AddRange( const Vector<T>& vector ) noexcept
         {
-            for(auto element : vector)
-                this->push_back(element);
+            for( auto element : vector )
+                this->push_back( element );
         }
 
-        void AddRange(Vector<T>&& vector) noexcept
+        void AddRange( Vector<T>&& vector ) noexcept
         {
-            for(auto element : vector)
-                this->push_back(element);
+            for( auto element : vector )
+                this->push_back( element );
         }
 
 
@@ -62,28 +62,22 @@ namespace Cx
             {
                 std::sort( this->begin(), this->end() );
             }
-            catch( const std::exception& e )
-            {
-                throw e;
-            }
+            catch( const std::exception& e ) { throw e; }
         }
 
         void Sort( const unsigned int positionBegin, const unsigned int positionEnd )
         {
             Vector<T> vector;
             for( unsigned int i = positionBegin; i <= positionEnd; ++i )
-                vector.push_back( this->at(i) );
+                vector.push_back( this->at( i ) );
             try
             {
                 std::sort( vector.begin(), vector.end() );
                 for( unsigned int i = positionBegin, j = 0; i < positionEnd; ++i, ++j )
-                    this->operator[]( i ) = vector.at(j);
+                    this->operator[]( i ) = vector.at( j );
                 this->operator[]( positionEnd ) = vector.at( vector.size() - 1 );
             }
-            catch( std::exception& e )
-            {
-                throw e;
-            }
+            catch( std::exception& e ) { throw e; }
         }
 
         void Sort( std::function<bool( T, T )> comparer )
@@ -92,10 +86,7 @@ namespace Cx
             {
                 std::sort( this->begin(), this->end(), comparer );
             }
-            catch( std::exception& e )
-            {
-                throw e;
-            }
+            catch( std::exception& e ) { throw e; }
         }
 
         void Sort( const unsigned int positionBegin, const unsigned int positionEnd, std::function<bool( T, T )> comparer )
@@ -110,10 +101,7 @@ namespace Cx
                     this->operator[]( i ) = vector.at( j );
                 this->operator[]( positionEnd ) = vector.at( vector.size() - 1 );
             }
-            catch( std::exception& e )
-            {
-                throw e;
-            }
+            catch( std::exception& e ) { throw e; }
         }
 
 
@@ -140,9 +128,7 @@ namespace Cx
             else if( size < this->size() )
                 throw std::invalid_argument( "destination smaller than source" );
             for( unsigned int i = 0; i < this->size(); ++i )
-            {
                 array[i] = this->at( i );
-            }
         }
 
         void CopyTo( T* array, const unsigned int size, unsigned int arrayIndex )
@@ -152,9 +138,7 @@ namespace Cx
             else if( size - arrayIndex < this->size() )
                 throw std::invalid_argument( "destination smaller than source" );
             for( unsigned int i = 0; i < this->size(); ++i, ++arrayIndex )
-            {
                 array[arrayIndex] = this->at( i );
-            }
         }
 
 
@@ -234,10 +218,7 @@ namespace Cx
             {
                 return IndexOfGenericImplementation( element, 0, this->size() );
             }
-            catch( const std::exception& e )
-            {
-                throw e;
-            }
+            catch( const std::invalid_argument& e ) { throw e; }
         }
 
         const int IndexOf( T element, const unsigned int start ) const
@@ -246,10 +227,7 @@ namespace Cx
             {
                 return IndexOfGenericImplementation( element, start, this->size() - start );
             }
-            catch( const std::exception& e )
-            {
-                throw e;
-            }
+            catch( const std::invalid_argument& e ) { throw e; }
         }
 
         const int IndexOf( T element, const unsigned int start, const unsigned int count ) const
@@ -258,23 +236,17 @@ namespace Cx
             {
                 return IndexOfGenericImplementation( element, start, count );
             }
-            catch( const std::exception& e )
-            {
-                throw e;
-            }
+            catch( const std::invalid_argument& e ) { throw e; }
         }
 
 
-        const int FindIndex( std::function<bool(T)> predicate ) const
+        const int FindIndex( std::function<bool( T )> predicate ) const
         {
             try
             {
                 return FindIndexGenericImplementation( predicate, 0, this->size() );
             }
-            catch( const std::exception& e )
-            {
-                throw e;
-            }
+            catch( const std::invalid_argument& e ) { throw e; }
         }
 
         const int FindIndex( std::function<bool( T )> predicate, const unsigned int start ) const
@@ -283,10 +255,7 @@ namespace Cx
             {
                 return FindIndexGenericImplementation( predicate, start, this->size() - start );
             }
-            catch( const std::exception& e )
-            {
-                throw e;
-            }
+            catch( const std::invalid_argument& e ) { throw e; }
         }
 
         const int FindIndex( std::function<bool( T )> predicate, const unsigned int start, const unsigned int count ) const
@@ -295,10 +264,7 @@ namespace Cx
             {
                 return FindIndexGenericImplementation( predicate, start, count );
             }
-            catch( const std::exception& e )
-            {
-                throw e;
-            }
+            catch( const std::invalid_argument& e ) { throw e; }
         }
 
 
@@ -306,7 +272,7 @@ namespace Cx
         {
             const auto swapRange = static_cast<int>(this->size() / 2);
             for( auto swappedIndex = 0; swappedIndex < swapRange; ++swappedIndex )
-                std::swap( this->operator[](swappedIndex), this->operator[](this->size() - 1 - swappedIndex) );
+                std::swap( this->operator[]( swappedIndex ), this->operator[]( this->size() - 1 - swappedIndex ) );
         }
 
         void Reverse( const unsigned int start, const unsigned int count )
@@ -369,25 +335,37 @@ namespace Cx
 
         void InsertRange( const unsigned int index, const std::vector<T>& range )
         {
-            try { InsertRange( index, range.data(), range.size() ); }
+            try
+            {
+                InsertRange( index, range.data(), range.size() );
+            }
             catch( std::invalid_argument& e ) { throw e; }
         }
 
         void InsertRange( const unsigned int index, std::vector<T>&& range )
         {
-            try { InsertRange( index, range.data(), range.size() ); }
+            try
+            {
+                InsertRange( index, range.data(), range.size() );
+            }
             catch( std::invalid_argument& e ) { throw e; }
         }
 
         void InsertRange( const unsigned int index, const Vector<T>& range )
         {
-            try { InsertRange( index, range.data(), range.size() ); }
+            try
+            {
+                InsertRange( index, range.data(), range.size() );
+            }
             catch( std::invalid_argument& e ) { throw e; }
         }
 
         void InsertRange( const unsigned int index, Vector<T>&& range )
         {
-            try { InsertRange( index, range.data(), range.size() ); }
+            try
+            {
+                InsertRange( index, range.data(), range.size() );
+            }
             catch( std::invalid_argument& e ) { throw e; }
         }
 
@@ -436,7 +414,7 @@ namespace Cx
         }
 
 
-        void ForEach( std::function<void(T&)> action ) noexcept
+        void ForEach( std::function<void( T& )> action ) noexcept
         {
             for( T& element : *this )
                 action( element );
@@ -500,7 +478,7 @@ namespace Cx
         }
 
 
-        const int FindIndexGenericImplementation( std::function<bool(T)> predicate, const unsigned int start, const unsigned int count ) const
+        const int FindIndexGenericImplementation( std::function<bool( T )> predicate, const unsigned int start, const unsigned int count ) const
         {
             if( start + count > this->size() )
                 throw std::invalid_argument( "search range exceeds containers size" );

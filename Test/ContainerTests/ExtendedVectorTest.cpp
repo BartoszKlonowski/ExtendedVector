@@ -8,6 +8,27 @@ class ExtendedVectorTest : public testing::Test
 {
 public:
     Cx::Vector<int> vector;
+
+    class Entity
+    {
+    public:
+        Entity( int i, float j ) : i{ i }, j{ j } {}
+        Entity( int i ) : i{ i } { j = 0; }
+        Entity() = default;
+
+        bool operator==( const Entity& element ) const
+        {
+            return this->i == element.i && this->j == element.j;
+        }
+
+        bool operator<( const Entity& e )
+        {
+            return i < e.i;
+        }
+
+        int i;
+        float j;
+    };
 };
 
 
@@ -75,23 +96,7 @@ TEST_F( ExtendedVectorTest, ContainerWithBasicTypesContainsAnElement )
 
 TEST_F( ExtendedVectorTest, ContainerWithCustomTypesContainsAnElement )
 {
-    class Entity
-    {
-    public:
-        Entity( int i, float j ) : i{ i }, j{ j }
-        {}
 
-        bool operator==(const Entity& element ) const
-        {
-            if( this->i == element.i && this->j == element.j )
-                return true;
-            else
-                return false;
-        }
-
-        int i;
-        float j;
-    };
 
     Cx::Vector<Entity> newVector;
     newVector.AddRange( {
@@ -123,17 +128,6 @@ TEST_F( ExtendedVectorTest, SortingBasicTypesAtWholeScopeWithDefaultComparer )
 
 TEST_F( ExtendedVectorTest, SortingCustomTypesAtWholeScopeWithDefaultComparer )
 {
-    class Entity
-    {
-    public:
-        Entity(int i) : i{i}
-        {}
-        int i;
-        bool operator<( const Entity& e )
-        {
-            return i < e.i;
-        }
-    };
     Cx::Vector<Entity> newVector;
     newVector.AddRange( { Entity(4),Entity(13),Entity(2),Entity(56),Entity(3) } );
     ASSERT_NO_THROW( newVector.Sort() );
@@ -159,17 +153,6 @@ TEST_F( ExtendedVectorTest, SortingBasicTypesAtSpecifiedScopeWithDefaultComparer
 
 TEST_F( ExtendedVectorTest, SortingCustomTypesAtSpecificScopeWithDefaultComparer )
 {
-    class Entity
-    {
-    public:
-        Entity( int i ) : i{ i }
-        {}
-        int i;
-        bool operator<( const Entity& e )
-        {
-            return i < e.i;
-        }
-    };
     Cx::Vector<Entity> newVector;
     newVector.AddRange( { Entity( 4 ),Entity( 13 ),Entity( 56 ),Entity( 2 ),Entity( 3 ) } );
     ASSERT_NO_THROW( newVector.Sort(1,3) );
@@ -197,13 +180,6 @@ TEST_F( ExtendedVectorTest, SortingBasicTypesAtWholeScopeWithCustomComparer )
 
 TEST_F( ExtendedVectorTest, SortingCustomTypesAtSpecificScopeWithCustomComparer )
 {
-    class Entity
-    {
-    public:
-        Entity( int i ) : i{ i }
-        {}
-        int i;
-    };
     Cx::Vector<Entity> newVector;
     newVector.AddRange( { Entity( 4 ),Entity( 13 ),Entity( 2 ),Entity( 56 ),Entity( 3 ) } );
     ASSERT_NO_THROW( newVector.Sort( 1, 3, []( Entity a, Entity b )->bool
@@ -234,14 +210,6 @@ TEST_F( ExtendedVectorTest, BasicTypeElementExistsInTheContainer )
 
 TEST_F( ExtendedVectorTest, CustomTypeElementExistsInTheContainer )
 {
-    class Entity
-    {
-    public:
-        Entity( int i ) : i{ i }
-        {
-        }
-        int i;
-    };
     Cx::Vector<Entity> newVector;
     newVector.AddRange( { Entity(3),Entity(4),Entity(12),Entity(5),Entity(98),Entity(11) } );
     auto falsePredicate = []( const Entity& element )->bool {
@@ -301,14 +269,6 @@ TEST_F( ExtendedVectorTest, FindBasicTypeElement )
 
 TEST_F( ExtendedVectorTest, FindCustomTypeElement )
 {
-    class Entity
-    {
-    public:
-        Entity() = default;
-        Entity(int i) : i{i} {}
-        int i;
-    };
-
     Cx::Vector<Entity> newVector;
     newVector.AddRange( { Entity(1),Entity(4),Entity(56),Entity(23),Entity(37) } );
     auto result = Entity(0);
@@ -350,13 +310,6 @@ TEST_F( ExtendedVectorTest, TrueForAllWithBasicType )
 
 TEST_F( ExtendedVectorTest, TrueForAllWithCustomType )
 {
-    class Entity
-    {
-    public:
-        Entity( int i ) : i{ i } {}
-        int i;
-    };
-
     Cx::Vector<Entity> newVector;
     newVector.AddRange( { Entity( 1 ),Entity( 1 ), Entity( 1 ), Entity( 1 ), Entity( 1 ) } );
     ASSERT_TRUE( newVector.TrueForAll( []( Entity element )->bool
@@ -422,14 +375,6 @@ TEST_F( ExtendedVectorTest, FindLastFailForBasicElementWhenNoSuchElement )
 
 TEST_F( ExtendedVectorTest, FindLastSuccessForCustomElement )
 {
-    class Entity
-    {
-    public:
-        Entity( int i ) : i{ i } {}
-        Entity() = default;
-        int i;
-        const bool operator==( const Entity& e ) const { return e.i == this->i; }
-    };
     Cx::Vector<Entity> entities;
     entities.AddRange( { Entity( 2 ), Entity( 15 ), Entity( 17 ), Entity( 10 ), Entity( 16 ), Entity( 5 ), Entity( 21 ) } );
     auto result = Entity( 0 );
@@ -439,14 +384,6 @@ TEST_F( ExtendedVectorTest, FindLastSuccessForCustomElement )
 
 TEST_F( ExtendedVectorTest, FindLastFailForCustomElementWhenNoSuchElement )
 {
-    class Entity
-    {
-    public:
-        Entity( int i ) : i{ i } {}
-        Entity() = default;
-        int i;
-        const bool operator==( const Entity& e ) const { return e.i == this->i; }
-    };
     Cx::Vector<Entity> entities;
     entities.AddRange( { Entity( 2 ), Entity( 15 ), Entity( 17 ), Entity( 10 ), Entity( 16 ), Entity( 5 ), Entity( 21 ) } );
     auto result = Entity(24);
@@ -474,14 +411,6 @@ TEST_F( ExtendedVectorTest, RemoveRangeFails )
 
 TEST_F( ExtendedVectorTest, RemoveRangeSuccessForCustomType )
 {
-    class Entity
-    {
-    public:
-        Entity( int i ) : i{ i } {}
-        int i;
-        const bool operator==( const Entity& e ) const { return e.i == this->i; }
-    };
-
     Cx::Vector<Entity> entities;
     entities.AddRange( { Entity( 1 ),Entity( 2 ), Entity( 3 ), Entity( 4 ), Entity( 5 ), Entity( 6 ) } );
     EXPECT_NO_THROW( entities.RemoveRange( 3, 2 ) );
@@ -494,13 +423,6 @@ TEST_F( ExtendedVectorTest, RemoveRangeSuccessForCustomType )
 
 TEST_F( ExtendedVectorTest, RemoveItemOfCustomType )
 {
-    class Entity
-    {
-    public:
-        Entity(int i) : i{i} {}
-        int i;
-        const bool operator==( const Entity e ) const { return e.i == this->i; }
-    };
     Cx::Vector<Entity> entities;
     entities.AddRange( { Entity(2), Entity(4), Entity(8), Entity(1), Entity(8), Entity(7) } );
     EXPECT_NO_THROW( entities.Remove( Entity( 8 ) ) );
@@ -527,13 +449,6 @@ TEST_F( ExtendedVectorTest, IndexOfSuccessForBasicTypeElement )
 
 TEST_F( ExtendedVectorTest, IndexOfSuccessForCustomTypeElement )
 {
-    class Entity
-    {
-    public:
-        Entity( int i ) : i{ i } {}
-        int i;
-        const bool operator==( const Entity e ) const { return e.i == this->i; }
-    };
     Cx::Vector<Entity> entities;
     entities.AddRange( { Entity( 2 ), Entity( 4 ), Entity( 8 ), Entity( 1 ), Entity( 8 ), Entity( 7 ) } );
     constexpr int expected = 3;
@@ -562,13 +477,6 @@ TEST_F( ExtendedVectorTest, IndexOfWithSpecificStartSuccessForBasicTypeElement )
 
 TEST_F( ExtendedVectorTest, IndexOfWithSpecificStartSuccessForCustomTypeElement )
 {
-    class Entity
-    {
-    public:
-        Entity( int i ) : i{ i } {}
-        int i;
-        const bool operator==( const Entity e ) const { return e.i == this->i; }
-    };
     Cx::Vector<Entity> entities;
     entities.AddRange( { Entity( 2 ), Entity( 4 ), Entity( 8 ), Entity( 1 ), Entity( 8 ), Entity( 7 ) } );
     constexpr int expected = 3;
@@ -588,13 +496,6 @@ TEST_F( ExtendedVectorTest, IndexOfWithSpecificStartAndCountSuccessForBasicTypeE
 
 TEST_F( ExtendedVectorTest, IndexOfWithSpecificStartAndCountSuccessForCustomTypeElement )
 {
-    class Entity
-    {
-    public:
-        Entity( int i ) : i{ i } {}
-        int i;
-        const bool operator==( const Entity e ) const { return e.i == this->i; }
-    };
     Cx::Vector<Entity> entities;
     entities.AddRange( { Entity( 2 ), Entity( 4 ), Entity( 8 ), Entity( 1 ), Entity( 8 ), Entity( 7 ) } );
     constexpr int expected = 3;
@@ -615,13 +516,6 @@ TEST_F( ExtendedVectorTest, FindIndexSuccessForBasicTypeElement )
 
 TEST_F( ExtendedVectorTest, FindIndexSuccessForCustomTypeElement )
 {
-    class Entity
-    {
-    public:
-        Entity( int i ) : i{ i } {}
-        int i;
-        const bool operator==( const Entity e ) const { return e.i == this->i; }
-    };
     Cx::Vector<Entity> entities;
     entities.AddRange( { Entity( 2 ), Entity( 4 ), Entity( 8 ), Entity( 1 ), Entity( 8 ), Entity( 7 ) } );
     constexpr int expected = 3;
@@ -650,13 +544,6 @@ TEST_F( ExtendedVectorTest, FindIndexWithSpecificStartSuccessForBasicTypeElement
 
 TEST_F( ExtendedVectorTest, FindIndexWithSpecificStartSuccessForCustomTypeElement )
 {
-    class Entity
-    {
-    public:
-        Entity( int i ) : i{ i } {}
-        int i;
-        const bool operator==( const Entity e ) const { return e.i == this->i; }
-    };
     Cx::Vector<Entity> entities;
     entities.AddRange( { Entity( 2 ), Entity( 4 ), Entity( 8 ), Entity( 1 ), Entity( 8 ), Entity( 7 ) } );
     constexpr int expected = 3;
@@ -676,13 +563,6 @@ TEST_F( ExtendedVectorTest, FindIndexWithSpecificStartAndCountSuccessForBasicTyp
 
 TEST_F( ExtendedVectorTest, FindIndexWithSpecificStartAndCountSuccessForCustomTypeElement )
 {
-    class Entity
-    {
-    public:
-        Entity( int i ) : i{ i } {}
-        int i;
-        const bool operator==( const Entity e ) const { return e.i == this->i; }
-    };
     Cx::Vector<Entity> entities;
     entities.AddRange( { Entity( 2 ), Entity( 4 ), Entity( 8 ), Entity( 1 ), Entity( 8 ), Entity( 7 ) } );
     constexpr int expected = 3;
