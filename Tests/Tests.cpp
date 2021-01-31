@@ -3,12 +3,12 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
-namespace Tests
+namespace Cx
 {
-	TEST_CLASS(Tests)
+	TEST_CLASS(SharpVectorBasicTests)
 	{
     private:
-        Cx::Vector<int> vector;
+        Vector<int> vector;
 
         class Entity
         {
@@ -56,7 +56,7 @@ namespace Tests
 
         TEST_METHOD( AddRangeByAnotherCxVectorGivenByReference )
         {
-            Cx::Vector<int> newVector;
+            Vector<int> newVector;
             newVector.AddRange( { 1,15,23,56 } );
             vector.AddRange( newVector );
             Assert::IsTrue( vector[0] == 1 );
@@ -68,7 +68,7 @@ namespace Tests
 
         TEST_METHOD( AddRangeByAnotherCxVectorGivenByRValue )
         {
-            Cx::Vector<int> newVector;
+            Vector<int> newVector;
             newVector.AddRange( { 1,15,23,56 } );
             vector.AddRange( std::move( newVector ) );
             Assert::IsTrue( vector[0] == 1 );
@@ -96,7 +96,7 @@ namespace Tests
 
         TEST_METHOD( ContainerWithCustomTypesContainsAnElement )
         {
-            Cx::Vector<Entity> newVector;
+            Vector<Entity> newVector;
             newVector.AddRange( {
                 Entity( 2,8 ),
                 Entity( 3,10 ),
@@ -126,7 +126,7 @@ namespace Tests
 
         TEST_METHOD( SortingCustomTypesAtWholeScopeWithDefaultComparer )
         {
-            Cx::Vector<Entity> newVector;
+            Vector<Entity> newVector;
             newVector.AddRange( { Entity( 4 ),Entity( 13 ),Entity( 2 ),Entity( 56 ),Entity( 3 ) } );
             newVector.Sort();
             Assert::IsTrue( newVector[0].i == 2 );
@@ -151,7 +151,7 @@ namespace Tests
 
         TEST_METHOD( SortingCustomTypesAtSpecificScopeWithDefaultComparer )
         {
-            Cx::Vector<Entity> newVector;
+            Vector<Entity> newVector;
             newVector.AddRange( { Entity( 4 ),Entity( 13 ),Entity( 56 ),Entity( 2 ),Entity( 3 ) } );
             newVector.Sort( 1, 3 );
             Assert::IsTrue( newVector[0].i == 4 );
@@ -178,7 +178,7 @@ namespace Tests
 
         TEST_METHOD( SortingCustomTypesAtSpecificScopeWithCustomComparer )
         {
-            Cx::Vector<Entity> newVector;
+            Vector<Entity> newVector;
             newVector.AddRange( { Entity( 4 ),Entity( 13 ),Entity( 2 ),Entity( 56 ),Entity( 3 ) } );
             newVector.Sort( 1, 3, []( Entity a, Entity b )->bool
                 {
@@ -208,7 +208,7 @@ namespace Tests
 
         TEST_METHOD( CustomTypeElementExistsInTheContainer )
         {
-            Cx::Vector<Entity> newVector;
+            Vector<Entity> newVector;
             newVector.AddRange( { Entity( 3 ),Entity( 4 ),Entity( 12 ),Entity( 5 ),Entity( 98 ),Entity( 11 ) } );
             auto falsePredicate = []( const Entity& element )->bool {
                 return element.i == 6;
@@ -267,7 +267,7 @@ namespace Tests
 
         TEST_METHOD( FindCustomTypeElement )
         {
-            Cx::Vector<Entity> newVector;
+            Vector<Entity> newVector;
             newVector.AddRange( { Entity( 1 ),Entity( 4 ),Entity( 56 ),Entity( 23 ),Entity( 37 ) } );
             auto result = Entity( 0 );
             result = newVector.Find( []( Entity element )->bool
@@ -308,7 +308,7 @@ namespace Tests
 
         TEST_METHOD( TrueForAllWithCustomType )
         {
-            Cx::Vector<Entity> newVector;
+            Vector<Entity> newVector;
             newVector.AddRange( { Entity( 1 ),Entity( 1 ), Entity( 1 ), Entity( 1 ), Entity( 1 ) } );
             Assert::IsTrue( newVector.TrueForAll( []( Entity element )->bool
                 {
@@ -373,7 +373,7 @@ namespace Tests
 
         TEST_METHOD( FindLastSuccessForCustomElement )
         {
-            Cx::Vector<Entity> entities;
+            Vector<Entity> entities;
             entities.AddRange( { Entity( 2 ), Entity( 15 ), Entity( 17 ), Entity( 10 ), Entity( 16 ), Entity( 5 ), Entity( 21 ) } );
             auto result = Entity( 0 );
             result = entities.FindLast( []( const Entity& e )->bool {return e.i % 5 == 0; } );
@@ -382,7 +382,7 @@ namespace Tests
 
         TEST_METHOD( FindLastFailForCustomElementWhenNoSuchElement )
         {
-            Cx::Vector<Entity> entities;
+            Vector<Entity> entities;
             entities.AddRange( { Entity( 2 ), Entity( 15 ), Entity( 17 ), Entity( 10 ), Entity( 16 ), Entity( 5 ), Entity( 21 ) } );
             auto result = Entity( 24 );
             result = entities.FindLast( []( const Entity& e )->bool {return e.i % 20 == 0; } );
@@ -409,7 +409,7 @@ namespace Tests
 
         TEST_METHOD( RemoveRangeSuccessForCustomType )
         {
-            Cx::Vector<Entity> entities;
+            Vector<Entity> entities;
             entities.AddRange( { Entity( 1 ),Entity( 2 ), Entity( 3 ), Entity( 4 ), Entity( 5 ), Entity( 6 ) } );
             entities.RemoveRange( 3, 2 );
             Assert::IsTrue( entities[0] == Entity( 1 ) );
@@ -421,7 +421,7 @@ namespace Tests
 
         TEST_METHOD( RemoveItemOfCustomType )
         {
-            Cx::Vector<Entity> entities;
+            Vector<Entity> entities;
             entities.AddRange( { Entity( 2 ), Entity( 4 ), Entity( 8 ), Entity( 1 ), Entity( 8 ), Entity( 7 ) } );
             entities.Remove( Entity( 8 ) );
             Assert::IsTrue( entities[0] == Entity( 2 ) );
@@ -447,7 +447,7 @@ namespace Tests
 
         TEST_METHOD( IndexOfSuccessForCustomTypeElement )
         {
-            Cx::Vector<Entity> entities;
+            Vector<Entity> entities;
             entities.AddRange( { Entity( 2 ), Entity( 4 ), Entity( 8 ), Entity( 1 ), Entity( 8 ), Entity( 7 ) } );
             constexpr int expected = 3;
             int result = -1;
@@ -475,7 +475,7 @@ namespace Tests
 
         TEST_METHOD( IndexOfWithSpecificStartSuccessForCustomTypeElement )
         {
-            Cx::Vector<Entity> entities;
+            Vector<Entity> entities;
             entities.AddRange( { Entity( 2 ), Entity( 4 ), Entity( 8 ), Entity( 1 ), Entity( 8 ), Entity( 7 ) } );
             constexpr int expected = 3;
             int result = -1;
@@ -494,7 +494,7 @@ namespace Tests
 
         TEST_METHOD( IndexOfWithSpecificStartAndCountSuccessForCustomTypeElement )
         {
-            Cx::Vector<Entity> entities;
+            Vector<Entity> entities;
             entities.AddRange( { Entity( 2 ), Entity( 4 ), Entity( 8 ), Entity( 1 ), Entity( 8 ), Entity( 7 ) } );
             constexpr int expected = 3;
             int result = -1;
@@ -514,7 +514,7 @@ namespace Tests
 
         TEST_METHOD( FindIndexSuccessForCustomTypeElement )
         {
-            Cx::Vector<Entity> entities;
+            Vector<Entity> entities;
             entities.AddRange( { Entity( 2 ), Entity( 4 ), Entity( 8 ), Entity( 1 ), Entity( 8 ), Entity( 7 ) } );
             constexpr int expected = 3;
             int result = -1;
@@ -542,7 +542,7 @@ namespace Tests
 
         TEST_METHOD( FindIndexWithSpecificStartSuccessForCustomTypeElement )
         {
-            Cx::Vector<Entity> entities;
+            Vector<Entity> entities;
             entities.AddRange( { Entity( 2 ), Entity( 4 ), Entity( 8 ), Entity( 1 ), Entity( 8 ), Entity( 7 ) } );
             constexpr int expected = 3;
             int result = -1;
@@ -561,7 +561,7 @@ namespace Tests
 
         TEST_METHOD( FindIndexWithSpecificStartAndCountSuccessForCustomTypeElement )
         {
-            Cx::Vector<Entity> entities;
+            Vector<Entity> entities;
             entities.AddRange( { Entity( 2 ), Entity( 4 ), Entity( 8 ), Entity( 1 ), Entity( 8 ), Entity( 7 ) } );
             constexpr int expected = 3;
             int result = -1;
@@ -809,7 +809,7 @@ namespace Tests
         TEST_METHOD( InsertRangeSuccessForDataAsLValueCxVector )
         {
             vector.AddRange( { 1,2,3,4,5,6,7,8,9 } );
-            Cx::Vector<int> range;
+            Vector<int> range;
             range.AddRange( { 10,20,30,40,50 } );
             vector.InsertRange( 3, range );
             Assert::IsTrue( vector[0] == 1 );
@@ -831,7 +831,7 @@ namespace Tests
         TEST_METHOD( InsertRangeSuccessForDataAsRValueCxVector )
         {
             vector.AddRange( { 1,2,3,4,5,6,7,8,9 } );
-            Cx::Vector<int> range;
+            Vector<int> range;
             range.AddRange( { 10,20,30,40,50 } );
             vector.InsertRange( 3, std::move( range ) );
             Assert::IsTrue( vector[0] == 1 );
@@ -854,7 +854,7 @@ namespace Tests
         TEST_METHOD( GetRangeSuccessForCorrectRange )
         {
             vector.AddRange( { 1,2,3,4,5,6,7,8,9 } );
-            Cx::Vector<int> range;
+            Vector<int> range;
             range = vector.GetRange( 3, 7 );
             Assert::IsTrue( range[0] == 4 );
             Assert::IsTrue( range[1] == 5 );
@@ -866,7 +866,7 @@ namespace Tests
         TEST_METHOD( GetRangeFailsForIncorrectRange )
         {
             vector.AddRange( { 1,2,3,4,5,6,7,8,9 } );
-            Cx::Vector<int> range;
+            Vector<int> range;
             Assert::ExpectException<std::invalid_argument>( [&]()->void {range = vector.GetRange( 3, 20 ); }  );
             Assert::ExpectException<std::invalid_argument>( [&]()->void {range = vector.GetRange( 11, 15 ); } );
             Assert::ExpectException<std::invalid_argument>( [&]()->void {range = vector.GetRange( 5, 2 ); } );
@@ -949,7 +949,7 @@ namespace Tests
         TEST_METHOD( ConvertAllSuccessForBasicType )
         {
             vector.AddRange( { 1,2,3,4,5,6,7,8,9 } );
-            Cx::Vector<float> converted;
+            Vector<float> converted;
             converted = vector.ConvertAll<float>( []( int item )->float { return item + 0.5f; } );
             Assert::IsTrue( converted.size() == vector.size() );
             for( unsigned int i = 0; i < converted.size(); ++i )
@@ -993,7 +993,7 @@ namespace Tests
         TEST_METHOD( FindAllSuccess )
         {
             vector.AddRange( { 13,2,14,3,1,15,16,23,24 } );
-            Cx::Vector<int> results;
+            Vector<int> results;
             results = vector.FindAll( []( const int& element )->bool {return element % 2 == 0; } );
             Assert::IsTrue( results.size() == 4 );
             Assert::IsTrue( results[0] == 2 );
@@ -1005,7 +1005,7 @@ namespace Tests
         TEST_METHOD( FindAllFailsByLeavingEmptyDefaultContainer )
         {
             vector.AddRange( { 13,2,14,3,1,15,16,23,24 } );
-            Cx::Vector<int> results;
+            Vector<int> results;
             results = vector.FindAll( []( const int& element )->bool {return element % 9 == 0; } );
             Assert::IsTrue( results.size() == 0 );
         }
