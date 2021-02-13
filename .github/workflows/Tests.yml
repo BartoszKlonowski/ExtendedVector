@@ -23,6 +23,9 @@ jobs:
       - name: Build Debug x64
         run: msbuild -p:Configuration=Debug -p:Platform=x64 SharpVector.sln -target:Tests
 
+      - name: Setup VSTest Path
+        uses: darenm/Setup-VSTest@v1
+
       - name: Run unit tests
         run: vstest.console.exe Build\Tests\Debug-x64\Tests.dll
 
