@@ -1,0 +1,51 @@
+name: SharpVector-Build-CMake
+
+on: [push]
+
+jobs:
+  debug:
+    name: Build Source-Debug
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Create directory
+        run: |
+          mkdir Build && cd Build
+          mkdir Debug && cd Debug
+
+      - name: Create CMake environment
+        run: |
+          cd Build/Debug
+          cmake -DCMAKE_BUILD_TYPE=Debug ../..
+
+      - name: Build Debug
+        run: |
+          cd Build/Debug
+          make
+
+
+  release:
+    name: Build Source-Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Create directory
+        run: |
+          mkdir Build && cd Build
+          mkdir Release && cd Release
+
+      - name: Create CMake environment
+        run: |
+          cd Build/Release
+          cmake -DCMAKE_BUILD_TYPE=Release ../..
+
+      - name: Build Release
+        run: |
+          cd Build/Release
+          make
