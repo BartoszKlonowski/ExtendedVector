@@ -1,0 +1,28 @@
+name: Tests
+
+on: [push]
+
+jobs:
+  Source-Debug-x64:
+    name: Unit tests - Debug-x64
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup MSBuild.exe
+        uses: microsoft/setup-msbuild@v1.0.2
+
+      - name: Setup NuGet
+        uses: nuget/setup-nuget@v1
+
+      - name: Restore all the packages
+        run: nuget restore SharpVector.sln
+
+      - name: Build Debug x64
+        run: msbuild -p:Configuration=Debug -p:Platform=x64 SharpVector.sln -target:Tests
+
+      - name: Run unit tests
+        run: vstest.console.exe Build\Tests\Debug-x64\Tests.dll
+
