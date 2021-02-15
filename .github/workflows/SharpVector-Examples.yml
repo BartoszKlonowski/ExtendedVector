@@ -75,7 +75,7 @@ jobs:
         run: dir
 
       - name: Run the Examples and check the results
-        run: .\Examples-Debug-x64\Examples.exe
+        run: .\Examples.exe
 
 
   Run-Release-x64:
@@ -93,5 +93,5 @@ jobs:
           name: Examples-Release-x64
 
       - name: Run the Examples and check the results
-        run: .\Examples-Release-x64\Examples.exe
+        run: .\Examples.exe
 
