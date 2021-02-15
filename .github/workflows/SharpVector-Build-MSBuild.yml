@@ -91,3 +91,9 @@ jobs:
 
       - name: Build Debug x64
         run: msbuild -p:Configuration=Release -p:Platform=x64 SharpVector.sln -target:Examples
+
+      - name: Cache Examples binary
+        uses: actions/upload-artifact@v2
+        with:
+          name: Examples-Release-x64
+          path: Build/Examples/Release-x64/Examples.exe

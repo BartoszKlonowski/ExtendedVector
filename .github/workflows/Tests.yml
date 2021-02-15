@@ -38,17 +38,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Setup MSBuild.exe
-        uses: microsoft/setup-msbuild@v1.0.2
+      - name: Download Examples executable for tests
+        uses: actions/download-artifact@v2
+        with:
+          name: Examples-Debug-x64
 
-      - name: Setup NuGet
-        uses: nuget/setup-nuget@v1
-
-      - name: Restore all the packages
-        run: nuget restore SharpVector.sln
-
-      - name: Build Debug x64
-        run: msbuild -p:Configuration=Debug -p:Platform=x64 SharpVector.sln -target:Examples
+      - name: Run the Examples and check the results
+        run: Examples-Debug-x64/Examples.exe
 
 
   Examples-Release-x64:
@@ -59,14 +55,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Setup MSBuild.exe
-        uses: microsoft/setup-msbuild@v1.0.2
+      - name: Download Examples executable for tests
+        uses: actions/download-artifact@v2
+        with:
+          name: Examples-Release-x64
 
-      - name: Setup NuGet
-        uses: nuget/setup-nuget@v1
-
-      - name: Restore all the packages
-        run: nuget restore SharpVector.sln
-
-      - name: Build Release x64
-        run: msbuild -p:Configuration=Release -p:Platform=x64 SharpVector.sln -target:Examples
+      - name: Run the Examples and check the results
+        run: Examples-Release-x64/Examples.exe
