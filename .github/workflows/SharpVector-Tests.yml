@@ -1,10 +1,10 @@
-name: Tests
+name: SharpVector-Tests
 
 on: [push]
 
 jobs:
-  UnitTests-Build-Debug-x64:
-    name: Unit tests - Debug-x64
+  Build-Debug-x64:
+    name: Build-Debug-x64
     runs-on: windows-latest
 
     steps:
@@ -30,10 +30,10 @@ jobs:
           path: Build/Tests/Debug-x64/Tests.dll
 
 
-  UnitTests-Run-Debug-x64:
-    name: Unit tests - Debug-x64
+  Run-Debug-x64:
+    name: Run-Debug-x64
     runs-on: windows-latest
-    needs: UnitTests-Build-Debug-x64
+    needs: Build-Debug-x64
 
     steps:
       - name: Checkout repository
