@@ -64,7 +64,11 @@ namespace Cx
                 this->push_back( element );
         }
 
-
+        /// <summary>
+        /// Determines whether an element is in the Vector
+        /// </summary>
+        /// <param name="item">The object to locate in the Vector</param>
+        /// <returns>true if item is found in the Vector, false otherwise</returns>
         bool Contains( T item ) const noexcept
         {
             for( auto it = this->begin(); it != this->end(); ++it )
