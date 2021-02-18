@@ -21,12 +21,22 @@ namespace Cx
         Vector( std::initializer_list<T> initialValues ) noexcept : std::vector<T>( initialValues )
         {}
 
+
+        /// <summary>
+        /// Adds the element of the specified collection to the end of the Vector
+        /// </summary>
+        /// <param name="list">The collection whose elements should be added to the end of the Vector.</param>
         void AddRange( const std::initializer_list<T>& list ) noexcept
         {
             for( auto element : list )
                 this->push_back( element );
         }
 
+        /// <summary>
+        /// Adds the element of the specified collection to the end of the Vector
+        /// </summary>
+        /// <param name="range">The collection whose elements should be added to the end of the Vector.</param>
+        /// <param name="size">Number of elements in the range which should be added</param>
         void AddRange( const T* const range, const unsigned int size ) noexcept
         {
             if( range != nullptr )
@@ -34,12 +44,20 @@ namespace Cx
                     this->push_back( range[i] );
         }
 
+        /// <summary>
+        /// Adds the element of the specified collection to the end of the Vector
+        /// </summary>
+        /// <param name="vector">The collection given as another Vector, whose elements should be copied to the end of current Vector</param>
         void AddRange( const Vector<T>& vector ) noexcept
         {
             for( auto element : vector )
                 this->push_back( element );
         }
 
+        /// <summary>
+        /// Adds the element of the specified collection to the end of the Vector
+        /// </summary>
+        /// <param name="vector">The collection given as another Vector, whose elements should be moved to the end of current Vector</param>
         void AddRange( Vector<T>&& vector ) noexcept
         {
             for( auto element : vector )
