@@ -1,0 +1,51 @@
+name: SharpVector-Tests
+
+on: [push]
+
+jobs:
+  Build-Debug-x64:
+    name: Build-Debug-x64
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup MSBuild.exe
+        uses: microsoft/setup-msbuild@v1.0.2
+
+      - name: Setup NuGet
+        uses: nuget/setup-nuget@v1
+
+      - name: Restore all the packages
+        run: nuget restore SharpVector.sln
+
+      - name: Build Debug x64
+        run: msbuild -p:Configuration=Debug -p:Platform=x64 SharpVector.sln -target:Tests
+
+      - name: Cache Tests binary
+        uses: actions/upload-artifact@v2
+        with:
+          name: Tests-Debug-x64
+          path: Build/Tests/Debug-x64/Tests.dll
+
+
+  Run-Debug-x64:
+    name: Run-Debug-x64
+    runs-on: windows-latest
+    needs: Build-Debug-x64
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Download Tests library for tests
+        uses: actions/download-artifact@v2
+        with:
+          name: Tests-Debug-x64
+
+      - name: Setup VSTest Path
+        uses: darenm/Setup-VSTest@v1
+
+      - name: Run unit tests
+        run: vstest.console.exe Tests.dll

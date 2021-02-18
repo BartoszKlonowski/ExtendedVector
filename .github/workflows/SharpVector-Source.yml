@@ -1,0 +1,93 @@
+name: SharpVector-Source
+
+on: [push]
+
+jobs:
+  Build-MSBuild-Debug-x64:
+    name: Build-MSBuild-Debug-x64
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup MSBuild.exe
+        uses: microsoft/setup-msbuild@v1.0.2
+
+      - name: Setup NuGet
+        uses: nuget/setup-nuget@v1
+
+      - name: Restore all the packages
+        run: nuget restore SharpVector.sln
+
+      - name: Build Debug x64
+        run: msbuild -p:Configuration=Debug -p:Platform=x64 SharpVector.sln -target:Source
+
+
+  Build-MSBuild-Release-x64:
+    name: Build-MSBuild-Release-x64
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup MSBuild.exe
+        uses: microsoft/setup-msbuild@v1.0.2
+
+      - name: Setup NuGet
+        uses: nuget/setup-nuget@v1
+
+      - name: Restore all the packages
+        run: nuget restore SharpVector.sln
+
+      - name: Build Debug x64
+        run: msbuild -p:Configuration=Release -p:Platform=x64 SharpVector.sln -target:Source
+
+
+  Build-CMake-Debug:
+    name: Build-CMake-Debug
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Create directory
+        run: |
+          mkdir Build && cd Build
+          mkdir Debug && cd Debug
+
+      - name: Create CMake environment
+        run: |
+          cd Build/Debug
+          cmake -DCMAKE_BUILD_TYPE=Debug ../..
+
+      - name: Build Debug
+        run: |
+          cd Build/Debug
+          make
+
+
+  Build-CMake-Release:
+    name: Build-CMake-Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Create directory
+        run: |
+          mkdir Build && cd Build
+          mkdir Release && cd Release
+
+      - name: Create CMake environment
+        run: |
+          cd Build/Release
+          cmake -DCMAKE_BUILD_TYPE=Release ../..
+
+      - name: Build Release
+        run: |
+          cd Build/Release
+          make
