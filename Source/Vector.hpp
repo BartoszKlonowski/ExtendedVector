@@ -228,11 +228,17 @@ namespace Cx
         }
 #pragma endregion
 
-
+#pragma region RemoveAll
+        /// <summary>
+        /// Removes all the elements that match the conditions defined by the specified predicate
+        /// </summary>
+        /// <param name="predicate">The std::function delegate that defines the conditions of the elements to remove</param>
+        /// <returns></returns>
         void RemoveAll( std::function<bool( T )> predicate ) noexcept
         {
             this->erase( std::remove_if( this->begin(), this->end(), predicate ), this->end() );
         }
+#pragma endregion
 
 
         const bool TrueForAll( std::function<bool( T )> predicate )
