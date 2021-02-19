@@ -210,7 +210,12 @@ namespace Cx
         }
 #pragma endregion
 
-
+#pragma region Find
+        /// <summary>
+        /// Searches for an element that matches the conditions defined by the specified predicate, and returns the first occurrence within the entire Vector
+        /// </summary>
+        /// <param name="predicate">The std::function delegate that defines the conditions of the element to search for</param>
+        /// <returns></returns>
         T Find( std::function<bool( T )> predicate )
         {
             if( predicate == nullptr )
@@ -221,6 +226,7 @@ namespace Cx
                     return it.operator*();
             return T();
         }
+#pragma endregion
 
 
         void RemoveAll( std::function<bool( T )> predicate ) noexcept
