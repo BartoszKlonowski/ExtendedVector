@@ -240,7 +240,12 @@ namespace Cx
         }
 #pragma endregion
 
-
+#pragma region TrueForAll
+        /// <summary>
+        /// Determines whether every element in the Vector matches the conditions defined by the specified predicate
+        /// </summary>
+        /// <param name="predicate">The std::function delegate that defines the conditions to check whether all elements meets the criteria</param>
+        /// <returns></returns>
         const bool TrueForAll( std::function<bool( T )> predicate )
         {
             if( predicate == nullptr )
@@ -250,6 +255,7 @@ namespace Cx
                     return false;
             return true;
         }
+#pragma endregion
 
 
         const int BinarySearch( T item ) noexcept
