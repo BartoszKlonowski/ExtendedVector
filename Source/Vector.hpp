@@ -78,6 +78,9 @@ namespace Cx
         }
 
 
+        /// <summary>
+        /// Sorts the elements in the Vector using the default std::sort
+        /// </summary>
         void Sort()
         {
             try
@@ -87,6 +90,11 @@ namespace Cx
             catch( const std::exception& e ) { throw e; }
         }
 
+        /// <summary>
+        /// Sorts a portion of the elements in the Vector using the default std::sort
+        /// </summary>
+        /// <param name="positionBegin">Index of the first element of the portion to sort</param>
+        /// <param name="positionEnd">Index of the last element of the portion to sort</param>
         void Sort( const unsigned int positionBegin, const unsigned int positionEnd )
         {
             Vector<T> vector;
@@ -102,6 +110,10 @@ namespace Cx
             catch( std::exception& e ) { throw e; }
         }
 
+        /// <summary>
+        /// Sorts the elements in the Vector using the specified comparer
+        /// </summary>
+        /// <param name="comparer">Function determining the sort order</param>
         void Sort( std::function<bool( T, T )> comparer )
         {
             try
@@ -111,6 +123,12 @@ namespace Cx
             catch( std::exception& e ) { throw e; }
         }
 
+        /// <summary>
+        /// Sorts a portion of the elements in the Vector using the specified comparer
+        /// </summary>
+        /// <param name="positionBegin">Index of the first element of the portion to sort</param>
+        /// <param name="positionEnd">Index of the last element of the portion to sort</param>
+        /// <param name="comparer">Function determining the sort order</param>
         void Sort( const unsigned int positionBegin, const unsigned int positionEnd, std::function<bool( T, T )> comparer )
         {
             Vector<T> vector;
