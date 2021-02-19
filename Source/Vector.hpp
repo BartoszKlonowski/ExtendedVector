@@ -21,7 +21,7 @@ namespace Cx
         Vector( std::initializer_list<T> initialValues ) noexcept : std::vector<T>( initialValues )
         {}
 
-
+#pragma region AddRange
         /// <summary>
         /// Adds the element of the specified collection to the end of the Vector
         /// </summary>
@@ -63,7 +63,9 @@ namespace Cx
             for( auto element : vector )
                 this->push_back( element );
         }
+#pragma endregion
 
+#pragma region Contains
         /// <summary>
         /// Determines whether an element is in the Vector
         /// </summary>
@@ -76,8 +78,9 @@ namespace Cx
                     return true;
             return false;
         }
+#pragma endregion
 
-
+#pragma region Sort
         /// <summary>
         /// Sorts the elements in the Vector using the default std::sort
         /// </summary>
@@ -143,6 +146,7 @@ namespace Cx
             }
             catch( std::exception& e ) { throw e; }
         }
+#pragma endregion
 
 
         const bool Exists( std::function<bool( T )> predicate ) const noexcept
