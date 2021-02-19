@@ -160,7 +160,14 @@ namespace Cx
         }
 #pragma endregion
 
-
+#pragma region CopyTo
+        /// <summary>
+        /// Copies a range of elements from the Vector to a compatible one-dimensional array starting at the specified index of the target
+        /// </summary>
+        /// <param name="index">The zero-based index in the source Vector at which copying begins</param>
+        /// <param name="array">The one-dimensional array that is the destination of the elements copied from from Vector. The array must have zero-based indexing</param>
+        /// <param name="arrayIndex">The zero-based index in array at which copying begins</param>
+        /// <param name="count">The number of elements to copy</param>
         void CopyTo( const unsigned int index, T* array, const unsigned int arrayIndex, const unsigned int count ) const
         {
             if( array == nullptr )
@@ -171,6 +178,11 @@ namespace Cx
                 array[arrayIndex + copiedElements] = this->operator[]( index + copiedElements );
         }
 
+        /// <summary>
+        /// Copies the entire Vector to a compatible one-dimensional array, starting at the beginning of the target array
+        /// </summary>
+        /// <param name="array">The one-dimensional array that is the destination of the elements copied from Vector</param>
+        /// <param name="size">Size of target array which the Vector's elements are copied to</param>
         void CopyTo( T* array, const unsigned int size )
         {
             if( array == nullptr )
@@ -181,6 +193,12 @@ namespace Cx
                 array[i] = this->at( i );
         }
 
+        /// <summary>
+        /// Copies the entire Vector to a compatible one-dimensional array, starting at the specified index of the target array
+        /// </summary>
+        /// <param name="array">The one-dimensional array that is the destination of the elements copied from Vector</param>
+        /// <param name="size">Size of target array which the Vector's elements are copied to</param>
+        /// <param name="arrayIndex">The zero-based index in the array at which copying begins</param>
         void CopyTo( T* array, const unsigned int size, unsigned int arrayIndex )
         {
             if( array == nullptr )
@@ -190,6 +208,7 @@ namespace Cx
             for( unsigned int i = 0; i < this->size(); ++i, ++arrayIndex )
                 array[arrayIndex] = this->at( i );
         }
+#pragma endregion
 
 
         T Find( std::function<bool( T )> predicate )
