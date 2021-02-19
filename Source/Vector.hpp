@@ -148,11 +148,17 @@ namespace Cx
         }
 #pragma endregion
 
-
+#pragma region Exists
+        /// <summary>
+        /// Determines whether the Vector contains elements that match the conditions defined by the specified predicate
+        /// </summary>
+        /// <param name="predicate">The predicate std::function delegate that defines the conditions of the elements to search for</param>
+        /// <returns>true if the Vector contains one or more elements that match the conditions defined by the specified predicate; false otherwise</returns>
         const bool Exists( std::function<bool( T )> predicate ) const noexcept
         {
             return std::find_if( this->begin(), this->end(), predicate ) != this->end();
         }
+#pragma endregion
 
 
         void CopyTo( const unsigned int index, T* array, const unsigned int arrayIndex, const unsigned int count ) const
