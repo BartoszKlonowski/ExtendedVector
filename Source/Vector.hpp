@@ -322,13 +322,19 @@ namespace Cx
         }
 #pragma endregion
 
-
+#pragma region RemoveRange
+        /// <summary>
+        /// Removes a range of elements from the Vector
+        /// </summary>
+        /// <param name="start">The zero-based starting index of the range of elements to remove</param>
+        /// <param name="count">The number of elements to remove</param>
         void RemoveRange( const unsigned int start, const unsigned int count )
         {
             if( start + count > this->size() )
                 throw std::invalid_argument( "range exceeds the container size" );
             this->erase( this->cbegin() + start, this->cbegin() + start + count );
         }
+#pragma endregion
 
 
         const int IndexOf( T element ) const
