@@ -514,7 +514,13 @@ namespace Cx
         }
 #pragma endregion
 
-
+#pragma region InsertRange
+        /// <summary>
+        /// Inserts the elements of a collection into the Vector at the specified index
+        /// </summary>
+        /// <param name="index">The zero-based index at which the new elements should be inserted</param>
+        /// <param name="range">The collection given as pointer to buffer whose elements should be insterted into the Vector</param>
+        /// <param name="n">Number of elements in the collection</param>
         void InsertRange( const unsigned int index, const T* const range, const unsigned int n )
         {
             if( range == nullptr )
@@ -525,6 +531,11 @@ namespace Cx
                 this->insert( this->cbegin() + index + i, range[i] );
         }
 
+        /// <summary>
+        /// Inserts the elements of a collection into the Vector at the specified index
+        /// </summary>
+        /// <param name="index">The zero-based index at which the new elements should be inserted</param>
+        /// <param name="range">The collection whose elements should be inserted into the Vector</param>
         void InsertRange( const unsigned int index, const std::vector<T>& range )
         {
             try
@@ -534,6 +545,11 @@ namespace Cx
             catch( std::invalid_argument& e ) { throw e; }
         }
 
+        /// <summary>
+        /// Inserts the elements of a collection into the Vector at the specified index
+        /// </summary>
+        /// <param name="index">The zero-based index at which the new elements should be inserted</param>
+        /// <param name="range">The collection whose elements should be inserted into the Vector</param>
         void InsertRange( const unsigned int index, std::vector<T>&& range )
         {
             try
@@ -543,6 +559,11 @@ namespace Cx
             catch( std::invalid_argument& e ) { throw e; }
         }
 
+        /// <summary>
+        /// Inserts the elements of a collection into the Vector at the specified index
+        /// </summary>
+        /// <param name="index">The zero-based index at which the new elements should be inserted</param>
+        /// <param name="range">The collection whose elements should be inserted into the Vector</param>
         void InsertRange( const unsigned int index, const Vector<T>& range )
         {
             try
@@ -552,6 +573,11 @@ namespace Cx
             catch( std::invalid_argument& e ) { throw e; }
         }
 
+        /// <summary>
+        /// Inserts the elements of a collection into the Vector at the specified index
+        /// </summary>
+        /// <param name="index">The zero-based index at which the new elements should be inserted</param>
+        /// <param name="range">The collection whose elements should be inserted into the Vector</param>
         void InsertRange( const unsigned int index, Vector<T>&& range )
         {
             try
@@ -560,6 +586,7 @@ namespace Cx
             }
             catch( std::invalid_argument& e ) { throw e; }
         }
+#pragma endregion
 
 
         Vector<T> GetRange( const unsigned int start, const unsigned int end ) const
