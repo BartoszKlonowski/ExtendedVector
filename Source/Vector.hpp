@@ -383,6 +383,12 @@ namespace Cx
         }
 #pragma endregion
 
+#pragma region FindIndex
+        /// <summary>
+        /// Searches for an element that matches the conditions defined by the specified predicate within the entire Vector
+        /// </summary>
+        /// <param name="predicate">The std::function predicate that defines the conditions of the element to search for</param>
+        /// <returns>The zero-based index of the first occurrence of an element that matches the conditions defined by predicate if found; -1 otherwise</returns>
         const int FindIndex( std::function<bool( T )> predicate ) const
         {
             try
@@ -392,6 +398,12 @@ namespace Cx
             catch( const std::invalid_argument& e ) { throw e; }
         }
 
+        /// <summary>
+        /// Searches for an element that matches the conditions defined by the specified predicate within the range of elements in the Vector that extends from the specified index to the last element
+        /// </summary>
+        /// <param name="predicate">The std::function predicate that defines the conditions of the element to search for</param>
+        /// <param name="start">The zero-based starting index of the search</param>
+        /// <returns>The zero-based index of the first occurrence of an element that matches the conditions defined by predicate if found; -1 otherwise</returns>
         const int FindIndex( std::function<bool( T )> predicate, const unsigned int start ) const
         {
             try
@@ -401,6 +413,13 @@ namespace Cx
             catch( const std::invalid_argument& e ) { throw e; }
         }
 
+        /// <summary>
+        /// Searches for an element that matches the conditions defined by the specified predicate within the range of elements in the Vector that starts at the specified index and contains the specified number of elements
+        /// </summary>
+        /// <param name="predicate">The std::function predicate that defines the conditions of the element to search for</param>
+        /// <param name="start">The zero-based starting index of the search</param>
+        /// <param name="count">The number of elements in the section to search</param>
+        /// <returns>The zero-based index of the first occurrence of an element that matches the conditions defined by predicate if found; -1 otherwise</returns>
         const int FindIndex( std::function<bool( T )> predicate, const unsigned int start, const unsigned int count ) const
         {
             try
@@ -409,7 +428,7 @@ namespace Cx
             }
             catch( const std::invalid_argument& e ) { throw e; }
         }
-
+#pragma endregion
 
         void Reverse() noexcept
         {
