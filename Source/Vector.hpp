@@ -670,12 +670,18 @@ namespace Cx
         }
 #pragma endregion
 
-
+#pragma region ForEach
+        /// <summary>
+        /// Performes the specified action on each element of the Vector
+        /// </summary>
+        /// <param name="action">The std::function delegate to perform on each element of the Vector</param>
+        /// <returns></returns>
         void ForEach( std::function<void( T& )> action ) noexcept
         {
             for( T& element : *this )
                 action( element );
         }
+#pragma endregion
 
 
         Vector<T> FindAll( std::function<bool( T )> predicate ) const noexcept
