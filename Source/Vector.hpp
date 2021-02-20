@@ -293,11 +293,18 @@ namespace Cx
         }
 #pragma endregion
 
+#pragma region Remove
+        /// <summary>
+        /// Removes the first occurrence of a specific object from the Vector
+        /// </summary>
+        /// <param name="item">The object to remove from the Vector</param>
+        /// <returns></returns>
         void Remove( T item ) noexcept
         {
             auto it = std::find( this->cbegin(), this->cend(), item );
             this->erase( it );
         }
+#pragma endregion
 
 
         T FindLast( std::function<bool( T )> predicate ) const noexcept
