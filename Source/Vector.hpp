@@ -657,12 +657,18 @@ namespace Cx
         }
 #pragma endregion
 
+#pragma region RemoveAt
+        /// <summary>
+        /// Removes the element at specified index of the Vector
+        /// </summary>
+        /// <param name="index">The zero-based index of the element to remove</param>
         void RemoveAt( const unsigned int index )
         {
             if( index >= this->size() )
                 throw std::invalid_argument( "index to remove exceeds the container size" );
             this->erase( this->cbegin() + index );
         }
+#pragma endregion
 
 
         void ForEach( std::function<void( T& )> action ) noexcept
