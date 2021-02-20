@@ -588,7 +588,13 @@ namespace Cx
         }
 #pragma endregion
 
-
+#pragma region GetRange
+        /// <summary>
+        /// Creates a shallow copy of a range of elements in the source Vector
+        /// </summary>
+        /// <param name="start">The zero-based index in Vector at which the range starts</param>
+        /// <param name="end">The zero-based index in Vector at which the range ends</param>
+        /// <returns>A shallow copy of a range of elements in the source Vector</returns>
         Vector<T> GetRange( const unsigned int start, const unsigned int end ) const
         {
             if( start >= this->size() || end >= this->size() || start >= end )
@@ -598,7 +604,7 @@ namespace Cx
                 newVector.push_back( *it );
             return newVector;
         }
-
+#pragma endregion
 
         const int LastIndexOf( T item ) const noexcept
         {
