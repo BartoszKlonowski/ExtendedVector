@@ -641,6 +641,13 @@ namespace Cx
         }
 #pragma endregion
 
+#pragma region ConvertAll
+        /// <summary>
+        /// Converts the elements in the current Vector to another type and returns a Vector containing the converted elements
+        /// </summary>
+        /// <typeparam name="Tout">The type of the elements of the target array</typeparam>
+        /// <param name="converter">A std::function delegate that converts each element from one type to another type</param>
+        /// <returns>A Vector of the target type containing the converted elements from the current Vector</returns>
         template<class Tout> Vector<Tout> ConvertAll( std::function<Tout( T )> converter ) const noexcept
         {
             Vector<Tout> convertedContainer;
@@ -648,7 +655,7 @@ namespace Cx
                 convertedContainer.push_back( converter( *it ) );
             return convertedContainer;
         }
-
+#pragma endregion
 
         void RemoveAt( const unsigned int index )
         {
