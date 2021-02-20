@@ -257,22 +257,41 @@ namespace Cx
         }
 #pragma endregion
 
-
+#pragma region BinarySearch
+        /// <summary>
+        /// Searches the entire sorted Vector for an element using the default comparer and returns the zero-based index of the element
+        /// </summary>
+        /// <param name="item">The object to locate</param>
+        /// <returns>The zero-based index of item in the sorted Vector if item is found; otherwise -1</returns>
         const int BinarySearch( T item ) noexcept
         {
             return BinarySearchGenericImplementation( item, [&]( T element )->bool { return element == item; }, 0, this->size() - 1 );
         }
 
+        /// <summary>
+        /// Searches the entire sorted Vector for an element using the specified comparer
+        /// </summary>
+        /// <param name="item">The object to locate</param>
+        /// <param name="predicate">The std::function predicate to use when comapring elements</param>
+        /// <returns>The zero-based index of item in the sorted Vector if item is found; -1 otherwise</returns>
         const bool BinarySearch( T item, std::function<bool( T )> predicate ) noexcept
         {
             return BinarySearchGenericImplementation( item, predicate, 0, this->size() - 1 );
         }
 
+        /// <summary>
+        /// Searches a range of elements in the sorted Vector for an element using the specified comparer
+        /// </summary>
+        /// <param name="item">The object to locate</param>
+        /// <param name="start">The zero-based starting index of the range to search</param>
+        /// <param name="count">The length of the range to search</param>
+        /// <param name="predicate">The std::function predicate to use when comparing elements</param>
+        /// <returns>The zero-based index of item in the sorted Vector if item is found; -1 otherwise</returns>
         const bool BinarySearch( T item, const unsigned int start, const unsigned int count, std::function<bool( T )> predicate )
         {
             return BinarySearchGenericImplementation( item, predicate, start, count );
         }
-
+#pragma endregion
 
         void Remove( T item ) noexcept
         {
