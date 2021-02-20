@@ -456,6 +456,12 @@ namespace Cx
         }
 #pragma endregion
 
+#pragma region FindLastIndex
+        /// <summary>
+        /// Searches for an element that matches the conditions defined by the specified predicate within the entire Vector
+        /// </summary>
+        /// <param name="predicate">The std::function delegate that defines the conditions of the element to search for</param>
+        /// <returns>The zero-based index of the last occurrence of an element that matches the conditions if found; -1 otherwise</returns>
         const int FindLastIndex( std::function<bool( T )> predicate ) const noexcept
         {
             int index = 0;
@@ -466,6 +472,12 @@ namespace Cx
             return lastIndex;
         }
 
+        /// <summary>
+        /// Searches for an element that matches the conditions defined by the specified predicate within the range of elements in the Vector that extends from the first element to the specified index
+        /// </summary>
+        /// <param name="end">The zero-based starting index of the backward search</param>
+        /// <param name="predicate">The std::function delegate that defines the conditions of the element to search for</param>
+        /// <returns>The zero-based index of the last occurrence of an element that matches the conditions if found; -1 otherwise</returns>
         const int FindLastIndex( const unsigned int end, std::function<bool( T )> predicate ) const
         {
             if( end >= this->size() )
@@ -478,6 +490,13 @@ namespace Cx
             return lastIndex;
         }
 
+        /// <summary>
+        /// Searches for an element that matches the conditions defined by the specified predicate within the range of elements in the Vector that contains the specified number of elements and ends at the specified index
+        /// </summary>
+        /// <param name="start">The zero-based starting index of the backward search</param>
+        /// <param name="end">The zero-based ending index of the backward search</param>
+        /// <param name="predicate">The std::function delegate that defines the conditions of the element to search for</param>
+        /// <returns>The zero-based index of the last occurrence of an element that matches the conditions if found; -1 otherwise</returns>
         const int FindLastIndex( const unsigned int start, const unsigned int end, std::function<bool( T )> predicate ) const
         {
             if( start > end )
@@ -493,6 +512,7 @@ namespace Cx
                     lastIndex = index;
             return lastIndex;
         }
+#pragma endregion
 
 
         void InsertRange( const unsigned int index, const T* const range, const unsigned int n )
