@@ -306,7 +306,12 @@ namespace Cx
         }
 #pragma endregion
 
-
+#pragma region FindLast
+        /// <summary>
+        /// Searches for an element that matches the conditions defined by the specified predicate, and returns the last occurrence within the entire Vector
+        /// </summary>
+        /// <param name="predicate">The std::function delegate that defines the conditions of the element to search for</param>
+        /// <returns>The last element that matches the conditions defined by the specified predicate if found; default T() otherwise</returns>
         T FindLast( std::function<bool( T )> predicate ) const noexcept
         {
             auto resultInstance = T();
@@ -315,6 +320,7 @@ namespace Cx
                     resultInstance = *it;
             return resultInstance;
         }
+#pragma endregion
 
 
         void RemoveRange( const unsigned int start, const unsigned int count )
