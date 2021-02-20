@@ -336,7 +336,12 @@ namespace Cx
         }
 #pragma endregion
 
-
+#pragma region IndexOf
+        /// <summary>
+        /// Searches for the specified object and returns the zero-based index of the first occurrence within the entire Vector
+        /// </summary>
+        /// <param name="element">The object to locate in the Vector</param>
+        /// <returns>The zero-based index of the first occurrence of item within the entire Vector if found; -1 otherwise</returns>
         const int IndexOf( T element ) const
         {
             try
@@ -346,6 +351,12 @@ namespace Cx
             catch( const std::invalid_argument& e ) { throw e; }
         }
 
+        /// <summary>
+        /// Searches for the specified object and returns the zero-based index of the first occurrence within the range of elements in the Vector that extends from the specified index to the last element
+        /// </summary>
+        /// <param name="element">The object to locate in the Vector</param>
+        /// <param name="start">The zero-based starting index of the search</param>
+        /// <returns>The zero-based index of the first occurrence of item within the entire Vector if found; -1 otherwise</returns>
         const int IndexOf( T element, const unsigned int start ) const
         {
             try
@@ -355,6 +366,13 @@ namespace Cx
             catch( const std::invalid_argument& e ) { throw e; }
         }
 
+        /// <summary>
+        /// Searches for the specified object and returns the zero-based index of the first occurrence within the range of elements in the Vector that starts at the specified index and contains the specified number of elements
+        /// </summary>
+        /// <param name="element">The object to locate in the specified range within the Vector</param>
+        /// <param name="start">The zero-based starting index of the search</param>
+        /// <param name="count">The number of elements in the section to search</param>
+        /// <returns>The zero-based index of the first occurrence of item within the entire Vector if found; -1 otherwise</returns>
         const int IndexOf( T element, const unsigned int start, const unsigned int count ) const
         {
             try
@@ -363,7 +381,7 @@ namespace Cx
             }
             catch( const std::invalid_argument& e ) { throw e; }
         }
-
+#pragma endregion
 
         const int FindIndex( std::function<bool( T )> predicate ) const
         {
