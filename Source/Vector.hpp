@@ -606,21 +606,40 @@ namespace Cx
         }
 #pragma endregion
 
+#pragma region LastIndexOf
+        /// <summary>
+        /// Searches for the specified object within the entire Vector
+        /// </summary>
+        /// <param name="item">The object to locate in the Vector. The value is not checked against nullptr</param>
+        /// <returns>The zero-based index of the last occurrence of item within the entire Vector if found; -1 otherwise</returns>
         const int LastIndexOf( T item ) const noexcept
         {
             return LastIndexOfGenericImplementation( item, 0, this->size() );
         }
 
+        /// <summary>
+        /// Searches for the specified object within the range of elements in the Vector. The range starts at position index and ends at the last element of Vector
+        /// </summary>
+        /// <param name="item">The object to locate in the Vector. The value is not checked against nullpts</param>
+        /// <param name="index">The zero-based starting index of the range to search</param>
+        /// <returns>The zero-based index of the last occurrence of item within the range of elements in the Vector</returns>
         const int LastIndexOf( T item, const unsigned int index )
         {
             return LastIndexOfGenericImplementation( item, 0, index );
         }
 
+        /// <summary>
+        /// Searches for the specified object within the range of elements in the Vector. The range starts at position index and comprises the number of elements given as count parameter.
+        /// </summary>
+        /// <param name="item">The object to locate in the Vector</param>
+        /// <param name="index">The zero-based starting index of the search</param>
+        /// <param name="count">The number of elements in the search range</param>
+        /// <returns>The zero-based index of the last occurrence within the specified range of elements in the Vector if found; -1 otherwise</returns>
         const int LastIndexOf( T item, const unsigned int index, const unsigned int count )
         {
             return LastIndexOfGenericImplementation( item, index, count );
         }
-
+#pragma endregion
 
         template<class Tout> Vector<Tout> ConvertAll( std::function<Tout( T )> converter ) const noexcept
         {
