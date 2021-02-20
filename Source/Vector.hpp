@@ -430,6 +430,11 @@ namespace Cx
         }
 #pragma endregion
 
+#pragma region Reverse
+        /// <summary>
+        /// Reverses the order of the elements in the entire Vector
+        /// </summary>
+        /// <returns></returns>
         void Reverse() noexcept
         {
             const auto swapRange = static_cast<int>(this->size() / 2);
@@ -437,6 +442,11 @@ namespace Cx
                 std::swap( this->operator[]( swappedIndex ), this->operator[]( this->size() - 1 - swappedIndex ) );
         }
 
+        /// <summary>
+        /// Reverses the order of the elements in the specified range within the Vector
+        /// </summary>
+        /// <param name="start">The zero-based starting index of the range to reverse</param>
+        /// <param name="count">The number of elements in the range to reverse</param>
         void Reverse( const unsigned int start, const unsigned int count )
         {
             if( start + count >= this->size() )
@@ -444,7 +454,7 @@ namespace Cx
             for( unsigned int swappedIndex = 0; swappedIndex < count / 2; ++swappedIndex )
                 std::swap( this->operator[]( swappedIndex + start ), this->operator[]( start + count - swappedIndex - 1 ) );
         }
-
+#pragma endregion
 
         const int FindLastIndex( std::function<bool( T )> predicate ) const noexcept
         {
