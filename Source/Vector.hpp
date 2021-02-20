@@ -683,7 +683,12 @@ namespace Cx
         }
 #pragma endregion
 
-
+#pragma region FindAll
+        /// <summary>
+        /// Retrieve all the elements that match the conditions defined by the specified predicate
+        /// </summary>
+        /// <param name="predicate">The std::function predicate that defines the conditions of the elements to search for</param>
+        /// <returns>A Vector containing all the elements that match the conditions defined by the specified predicate if any is found; empty Vector otherwise</returns>
         Vector<T> FindAll( std::function<bool( T )> predicate ) const noexcept
         {
             Vector<T> results;
@@ -692,7 +697,7 @@ namespace Cx
                     results.push_back( element );
             return results;
         }
-
+#pragma endregion
 
 
     private:
