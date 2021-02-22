@@ -215,7 +215,7 @@ namespace Cx
         /// Searches for an element that matches the conditions defined by the specified predicate, and returns the first occurrence within the entire Vector
         /// </summary>
         /// <param name="predicate">The std::function delegate that defines the conditions of the element to search for</param>
-        /// <returns></returns>
+        /// <returns>The first element that matches the conditions defined by the specified predicate if found; default T value otherwise</returns>
         T Find( std::function<bool( T )> predicate )
         {
             if( predicate == nullptr )
