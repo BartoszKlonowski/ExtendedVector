@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Examples\BusinessObject.cpp" />
     <ClCompile Include="Examples\CitiesFilteringApplication.cpp" />
     <ClCompile Include="Examples\Coordinates.cpp" />
     <ClCompile Include="Source.cpp" />
