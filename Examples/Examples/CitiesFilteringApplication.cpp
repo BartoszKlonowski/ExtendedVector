@@ -1,6 +1,7 @@
 #include "../ErrorCodes.hpp"
 #include "../../Source/Vector.hpp"
 #include <string>
+#include <iostream>
 
 
 namespace Examples
@@ -99,6 +100,7 @@ namespace Examples
 
             if( citiesFilter.GetNameOfMostPopulated() != "Tokyo" )
             {
+                std::cout << "ExampleApplication1 - GetNameOfMostPopulated() failed!" << std::endl;
                 return ErrorCodes::Error;
             }
 
@@ -106,12 +108,14 @@ namespace Examples
             citiesFilter.RemoveCity( cityToRemove );
             if( citiesFilter.FindByName( "Bydgoszcz" ).Name() != "" )
             {
+                std::cout << "ExampleApplication1 - RemoveCity( \"Bydgosz\", 355000) failed!" << std::endl;
                 return ErrorCodes::Error;
             }
 
             citiesFilter.AddNewCity( City( "Krakow", 456098 ) );
             if( citiesFilter.FindByName( "Krakow" ).PopulationCount() != 456098 )
             {
+                std::cout << "ExampleApplication1 - AddNewCity( \"Krakow\", 456098) failed!" << std::endl;
                 return ErrorCodes::Error;
             }
 
@@ -120,11 +124,13 @@ namespace Examples
             {
                 if( citiesFilter.GetNameOfMostPopulated() != "Madrid" )
                 {
+                    std::cout << "ExampleApplication1 - GetNameOfMostPopulated() failed!" << std::endl;
                     return ErrorCodes::Error;
                 }
             }
             else
             {
+                std::cout << "ExampleApplication1 - FindByName(\"Tokyo\") failed!" << std::endl;
                 return ErrorCodes::Error;
             }
 
