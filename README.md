@@ -1,18 +1,31 @@
-# Vector #
+<h1 align="center"> SharpVector </h1>
+<p align="center">
+    Increase your productivity and vector handling with just one header.
+</p>
+<p align="center">
+    <a href="https://github.com/BartoszKlonowski/SharpVector/blob/main/LICENSE">
+        <img src="https://img.shields.io/github/license/BartoszKlonowski/SharpVector?style=plastic" alt="SharpVector is released under the MIT license." />
+    </a>
+    <a href="https://github.com/BartoszKlonowski/SharpVector/actions/workflows/SharpVector-Build-MSBuild.yml">
+        <img src="https://img.shields.io/github/workflow/status/BartoszKlonowski/SharpVector/SharpVector-Build-MSBuild?label=MSBuild&style=plastic" alt="MSVC build status" />
+    </a>
+    <a href="https://github.com/BartoszKlonowski/SharpVector/actions/workflows/SharpVector-Build-CMake.yml">
+        <img src="https://img.shields.io/github/workflow/status/BartoszKlonowski/SharpVector/SharpVector-Build-CMake?label=CMake&style=plastic" alt="CMake g++ build status" />
+    </a>
+</p>
 
-This project is the extension of std::vector<T> from STL but based on .NET Framework List<T>.  
+This project is the extension of std::vector<T> from STL but based on .NET Framework List<T>.
 It means, that all of features and methods provided by [List<T>](https://docs.microsoft.com/pl-pl/dotnet/api/system.collections.generic.list-1?view=netframework-4.8#methods)
-should also be available in the implmemented std::vector<T> extension: Cx::Vector<T>.  
+should also be available in the implemented std::vector<T> extension: Cx::Vector<T>.  
   
   
 ---
   
 ## The goal ##
 
-The goal of this project was to create the extension of std::vector<T> which will be easy to use for basic operations like:  
-searching, sorting, getting indexes, performing actions for each of the element, checking existence of specific element,  
-and many other, which are currently not included in just the *vector* header, but require more includes and more LOC.  
-  
+The goal of this project was to create the extension of std::vector<T> which will be easy to use for basic operations like:
+searching, sorting, getting indexes, performing actions for each of the element, checking existence of specific element,
+and many other, which are currently not included in just the *vector* header, but require more includes and more LOC.
 The other goal of this project was to practice and improve the skills in:
 
 * C++11/14/17 programming
