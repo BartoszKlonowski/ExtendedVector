@@ -23,31 +23,12 @@ Please check the official documentation of [std::vector\<T>](https://en.cpprefer
   
 ---
   
-## Technology ##
+## Installation & Usage ##
 
-As already mentioned this project was developed using the following tools:
-
-|      Name     | Version |
-|:-------------:|:-------:|
-|       C++     |    17   |
-|    GNU GCC    |  7.3.0  |
-| Visual Studio |  16.5.4 |
-|     CMake     |  3.17.1 |
-|  Google Test  |  1.10.0 |
-  
-  
----
-  
-## Development ##
-
-The whole development process was based on a single *master* branch.
-
-More branches would only be used in this project for refactoring, risky bugfixing, etc.
-
-This approach had a chance of being successful only because of one developer working on the project.
-
-With proper commit messages and consequent commiting after each step it was possible to still keep the trackability and an order in development.
-
+To use this tool:
+* Download the archived package,
+* Unpack the release package and place the main implementation's header (which is *Vector.hpp*) in any directory within your project (for example "*Dependencies*" or "*3rdParties*"),
+* Include the *Vector.hpp* header in your implementation and call the `Cx::Vector<T>` to instantiate the container.
 
 ---
 
