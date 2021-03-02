@@ -14,24 +14,12 @@
     </a>
 </p>
 
-This project is the extension of std::vector<T> from STL but based on .NET Framework List<T>.
-It means, that all of features and methods provided by [List<T>](https://docs.microsoft.com/pl-pl/dotnet/api/system.collections.generic.list-1?view=netframework-4.8#methods)
-should also be available in the implemented std::vector<T> extension: Cx::Vector<T>.  
-  
-  
----
-  
-## The goal ##
+This project is the extension of `std::vector<T>` from STL but based on .NET Framework `List<T>`.
+<br/>It means, that all of features and methods provided by `List<T>` should also be available in the implemented `std::vector<T>` extension: `Cx::Vector<T>`.
 
-The goal of this project was to create the extension of std::vector<T> which will be easy to use for basic operations like:
-searching, sorting, getting indexes, performing actions for each of the element, checking existence of specific element,
-and many other, which are currently not included in just the *vector* header, but require more includes and more LOC.
-The other goal of this project was to practice and improve the skills in:
+The goal of this project was to create the tool which will make the usage of standard `std::vector<T>` even easier when it comes to complex yet typical operations done on collections which are currently not a part of the *vector* header, but require more includes and more LOC.
 
-* C++11/14/17 programming
-* Unit testing with Google Tests
-* Best practices when creating software and libraries
-  
+Please check the official documentation of [std::vector\<T>](https://en.cppreference.com/w/cpp/container/vector) and [System.Collections.Generic.List\<T>](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1?view=netframework-4.8) to see the two bases of this product and how it connects both of them.
   
 ---
   
