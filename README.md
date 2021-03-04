@@ -46,7 +46,6 @@ Each method implemented within the `Cx::Vector<T>` corresponds to the same metho
 
 **NOTE:** Each method implemented in the *Vector.hpp* header are also covered with the *doxygen* comments (`///`), so each code editor supporting displaying them will show the method documented each time it is called within your code.
 
-
 The presentation of some of the Cx::Vector abilities is done in the *Examples* project's source code files.
 <br/>So to fully check the abilities of the SharpVector utility, please go to the [Examples](https://github.com/BartoszKlonowski/SharpVector/tree/main/Examples) directory.
 
@@ -115,4 +114,19 @@ Index of 'Animal:Dog' is: 2
 Printing Cx::Vector with 3 elements inside:
 Animal:Cat Animal:Wolf Animal:Dog
 ```
+
+---
+
+## Contributing ##
+
+If you would like to contribute to the *SharpVector* project, you are more than welcome!
+<br/>Any contribution is to make the project better and to improve the developer's experience.
+<br/>So if you'd like to contribute, you can do this in one of the following ways:
+
+* Create an [Issue](https://github.com/BartoszKlonowski/SharpVector/issues/new) and let the author handle it
+<br/>Each issue created in the [Issues](https://github.com/BartoszKlonowski/SharpVector/issues) section gives a chance of improving the project and make it even more useful.
+* Create the [Pull Request](https://github.com/BartoszKlonowski/SharpVector/compare) with the desired changes
+<br/>After a detailed review it will be merged.
+<br/>Please remember to give the detailed description of why such change is needed, what is the test plan and what are the details of your implementation. This will make the review easier and quicker.
+<br/>Please also remember to check the unit tests and implement additional tests in case of providing the project with some new features/new code.
 
