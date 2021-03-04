@@ -130,3 +130,8 @@ If you would like to contribute to the *SharpVector* project, you are more than 
 <br/>Please remember to give the detailed description of why such change is needed, what is the test plan and what are the details of your implementation. This will make the review easier and quicker.
 <br/>Please also remember to check the unit tests and implement additional tests in case of providing the project with some new features/new code.
 
+---
+
+## Thank you! ##
+
+If you like this project, or you consider it helpfull, please share your opinion with the author or just give it a star!
