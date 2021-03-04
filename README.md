@@ -26,9 +26,13 @@ Please check the official documentation of [std::vector\<T>](https://en.cpprefer
 ## Installation & Usage ##
 
 To use this tool:
-* Download the archived package,
+* Download the archived release package,
 * Unpack the release package and place the main implementation's header (which is *Vector.hpp*) in any directory within your project (for example "*Dependencies*" or "*3rdParties*"),
 * Include the *Vector.hpp* header in your implementation and call the `Cx::Vector<T>` to instantiate the container.
+
+**NOTE:**
+<br/>SharpVector already uses several other includes from standard library, such as the following:
+<br/>*memory*, *vector*, *iostream*, *algorithm*, *functional*, *string*, *exception*
 
 ---
 
