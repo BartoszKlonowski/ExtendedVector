@@ -37,12 +37,20 @@ To use this tool:
 ---
 
 
-## Results ##
+## Documentation ##
 
-The presentation of some of the Cx::Vector abilities is done in the *App/Main.cpp* source code file.  
-The `main()` method shows the usage of this container and prints it's results to the console.  
-Below the `main()` source can be found:  
+This project fills the gap between the `std::vector<T>` and `System.Collections.Generic.List<T>` which means that it brings all the features already available in the `List<T>` to the `std::vector<T>`, making a `Cx::Vector<T>` in result.
+Each method implemented within the `Cx::Vector<T>` corresponds to the same method in the `List<T>` from .NET.
+<br/>So to check the method's documentation in details please check the .NET's official documentation of `List<T>` [methods](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1?view=netframework-4.8#methods) section.
+<br/>The methods already available in the original `std::vector<T>` are still available unchanged when using `Cx::Vector<T>`.
 
+**NOTE:** Each method implemented in the *Vector.hpp* header are also covered with the *doxygen* comments (`///`), so each code editor supporting displaying them will show the method documented each time it is called within your code.
+
+
+The presentation of some of the Cx::Vector abilities is done in the *Examples* project's source code files.
+<br/>So to fully check the abilities of the SharpVector utility, please go to the [Examples](https://github.com/BartoszKlonowski/SharpVector/tree/main/Examples) directory.
+
+Below you can find just a short demo of what the *SharpVector* project is all about and what are the example benefits of using it:
 ```cpp
     Cx::Vector<std::string> vector;
     vector.push_back( "Hello" );
