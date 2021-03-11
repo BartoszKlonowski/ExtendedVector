@@ -5,17 +5,17 @@
         <version>1.0.0</version>
         <description>
             SharpVector utility - std::vector with all .NET's List features: ForEach, FindAll, and more!
-            <br/>Increase your productivity and vector handling with just one header.
+            Increase your productivity and vector handling with just one header.
         </description>
         <authors>BartoszKlonowski</authors>
-        <tags>Native, native</tags>
+        <tags>Native native vector Cpp List ForEach FindAll BinarySearch Exists CopyTo Find IndexOf</tags>
         <license type="file">LICENSE.txt</license>
         <projectUrl>https://github.com/BartoszKlonowski/SharpVector</projectUrl>
     </metadata>
      
     <files>
-        <file src="LICENSE.txt"             target="" />
-        <file src="README.txt"              target="SharpVector" />
-        <file src="../Source/Vector.hpp"    target="SharpVector" />
+        <file src="LICENSE.txt"               target="" />
+        <file src="README.txt"                target="SharpVector" />
+        <file src="./../../Source/Vector.hpp" target="SharpVector" />
     </files>
 </package>
