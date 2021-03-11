@@ -3,7 +3,7 @@
     <metadata>
         <id>SharpVector</id>
         <version>1.0.0</version>
-        <description>SharpVector utility - std::vector<T> with all .NET's List<T> features: ForEach, FindAll, and more!</description>
+        <description>SharpVector utility - std::vector with all .NET's List features: ForEach, FindAll, and more!</description>
         <tags>Native, native</tags>
     </metadata>
      
