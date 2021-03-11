@@ -12,7 +12,7 @@
         <license type="file">LICENSE.txt</license>
         <projectUrl>https://github.com/BartoszKlonowski/SharpVector</projectUrl>
     </metadata>
-     
+
     <files>
         <file src="LICENSE.txt"               target="" />
         <file src="README.txt"                target="SharpVector" />
