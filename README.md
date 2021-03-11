@@ -32,7 +32,7 @@ To use this tool:
 
 **NOTE:**
 <br/>SharpVector already uses several other includes from standard library, such as the following:
-<br/>*memory*, *vector*, *iostream*, *algorithm*, *functional*, *string*, *exception*
+<br/>*vector*, *iostream*, *algorithm*, *functional*
 
 ---
 

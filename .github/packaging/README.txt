@@ -28,7 +28,7 @@ To use this tool:
 
 **NOTE:**
 SharpVector already uses several other includes from standard library, such as the following:
-*memory*, *vector*, *iostream*, *algorithm*, *functional*, *string*, *exception*
+*vector*, *iostream*, *algorithm*, *functional*
 
 ---
 
