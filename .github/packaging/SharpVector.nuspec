@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package >
+    <metadata>
+        <id>SharpVector</id>
+        <version>1.0.0</version>
+        <description>SharpVector utility - std::vector<T> with all .NET's List<T> features: ForEach, FindAll, and more!</description>
+        <tags>Native, native</tags>
+    </metadata>
+     
+    <files>
+        <file src="LICENSE"                 target="SharpVector" />
+        <file src="README.txt"              target="SharpVector" />
+        <file src="../Source/Vector.hpp"    target="SharpVector" />
+    </files>
+</package>
