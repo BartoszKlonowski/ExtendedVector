@@ -7,6 +7,7 @@
         <authors>BartoszKlonowski</authors>
         <tags>Native, native</tags>
         <license type="file">LICENSE.txt</license>
+        <projectUrl>https://github.com/BartoszKlonowski/SharpVector</projectUrl>
     </metadata>
      
     <files>
