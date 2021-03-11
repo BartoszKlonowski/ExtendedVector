@@ -6,10 +6,11 @@
         <description>SharpVector utility - std::vector with all .NET's List features: ForEach, FindAll, and more!</description>
         <authors>BartoszKlonowski</authors>
         <tags>Native, native</tags>
+        <license type="file">LICENSE.txt</license>
     </metadata>
      
     <files>
-        <file src="LICENSE"                 target="SharpVector" />
+        <file src="LICENSE.txt"             target="" />
         <file src="README.txt"              target="SharpVector" />
         <file src="../Source/Vector.hpp"    target="SharpVector" />
     </files>
