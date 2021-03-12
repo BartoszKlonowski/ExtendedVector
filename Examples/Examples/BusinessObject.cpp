@@ -1,5 +1,6 @@
 #include "../ErrorCodes.hpp"
 #include "../../Source/Vector.hpp"
+#include <string>
 
 
 namespace Examples
