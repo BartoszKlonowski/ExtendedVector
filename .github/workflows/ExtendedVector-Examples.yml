@@ -1,4 +1,4 @@
-name: SharpVector-Examples
+name: ExtendedVector-Examples
 
 on: [push]
 
@@ -18,10 +18,10 @@ jobs:
         uses: nuget/setup-nuget@v1
 
       - name: Restore all the packages
-        run: nuget restore SharpVector.sln
+        run: nuget restore ExtendedVector.sln
 
       - name: Build Debug x64
-        run: msbuild -p:Configuration=Debug -p:Platform=x64 SharpVector.sln -target:Examples
+        run: msbuild -p:Configuration=Debug -p:Platform=x64 ExtendedVector.sln -target:Examples
 
       - name: Cache Examples binary
         uses: actions/upload-artifact@v2
@@ -45,10 +45,10 @@ jobs:
         uses: nuget/setup-nuget@v1
 
       - name: Restore all the packages
-        run: nuget restore SharpVector.sln
+        run: nuget restore ExtendedVector.sln
 
       - name: Build Debug x64
-        run: msbuild -p:Configuration=Release -p:Platform=x64 SharpVector.sln -target:Examples
+        run: msbuild -p:Configuration=Release -p:Platform=x64 ExtendedVector.sln -target:Examples
 
       - name: Cache Examples binary
         uses: actions/upload-artifact@v2

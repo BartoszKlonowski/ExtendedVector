@@ -1,4 +1,4 @@
-name: SharpVector-Tests
+name: ExtendedVector-Tests
 
 on: [push]
 
@@ -18,10 +18,10 @@ jobs:
         uses: nuget/setup-nuget@v1
 
       - name: Restore all the packages
-        run: nuget restore SharpVector.sln
+        run: nuget restore ExtendedVector.sln
 
       - name: Build Debug x64
-        run: msbuild -p:Configuration=Debug -p:Platform=x64 SharpVector.sln -target:Tests
+        run: msbuild -p:Configuration=Debug -p:Platform=x64 ExtendedVector.sln -target:Tests
 
       - name: Cache Tests binary
         uses: actions/upload-artifact@v2
