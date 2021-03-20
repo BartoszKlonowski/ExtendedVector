@@ -5,7 +5,7 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace Cx
 {
-	TEST_CLASS(SharpVectorBasicTests)
+	TEST_CLASS(ExtendedVectorBasicTests)
 	{
     private:
         Vector<int> vector;

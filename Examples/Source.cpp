@@ -7,7 +7,7 @@
 
 int main()
 {
-    std::cout << "SharpVector - Examples application!" << std::endl;
+    std::cout << "ExtendedVector - Examples application!" << std::endl;
 
     Examples::ExampleApplication1 example1;
     Examples::ExampleApplication2 example2;
