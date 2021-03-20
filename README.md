@@ -1,16 +1,16 @@
-<h1 align="center"> SharpVector </h1>
+<h1 align="center"> ExtendedVector </h1>
 <p align="center">
     Increase your productivity and vector handling with just one header.
 </p>
 <p align="center">
-    <a href="https://github.com/BartoszKlonowski/SharpVector/blob/main/LICENSE">
-        <img src="https://img.shields.io/github/license/BartoszKlonowski/SharpVector?style=plastic" alt="SharpVector is released under the MIT license." />
+    <a href="https://github.com/BartoszKlonowski/ExtendedVector/blob/main/LICENSE">
+        <img src="https://img.shields.io/github/license/BartoszKlonowski/ExtendedVector?style=plastic" alt="ExtendedVector is released under the MIT license." />
     </a>
-    <a href="https://github.com/BartoszKlonowski/SharpVector/actions/workflows/SharpVector-Build-MSBuild.yml">
-        <img src="https://img.shields.io/github/workflow/status/BartoszKlonowski/SharpVector/SharpVector-Build-MSBuild?label=MSBuild&style=plastic" alt="MSVC build status" />
+    <a href="https://github.com/BartoszKlonowski/ExtendedVector/actions/workflows/ExtendedVector-Tests.yml">
+        <img src="https://img.shields.io/github/workflow/status/BartoszKlonowski/ExtendedVector/ExtendedVector-Tests?label=Tests&style=plastic" alt="Unit Tests status" />
     </a>
-    <a href="https://github.com/BartoszKlonowski/SharpVector/actions/workflows/SharpVector-Build-CMake.yml">
-        <img src="https://img.shields.io/github/workflow/status/BartoszKlonowski/SharpVector/SharpVector-Build-CMake?label=CMake&style=plastic" alt="CMake g++ build status" />
+    <a href="https://github.com/BartoszKlonowski/ExtendedVector/actions/workflows/ExtendedVector-Source.yml">
+        <img src="https://img.shields.io/github/workflow/status/BartoszKlonowski/ExtendedVector/ExtendedVector-Source?label=Build%3A%20CMake%20%26%20MSBuild&style=plastic" alt="Source: CMake & MSBuild build status" />
     </a>
 </p>
 
@@ -31,7 +31,7 @@ To use this tool:
 * Include the *Vector.hpp* header in your implementation and call the `Cx::Vector<T>` to instantiate the container.
 
 **NOTE:**
-<br/>SharpVector already uses several other includes from standard library, such as the following:
+<br/>ExtendedVector already uses several other includes from standard library, such as the following:
 <br/>*vector*, *iostream*, *algorithm*, *functional*
 
 ---
@@ -47,9 +47,9 @@ Each method implemented within the `Cx::Vector<T>` corresponds to the same metho
 **NOTE:** Each method implemented in the *Vector.hpp* header are also covered with the *doxygen* comments (`///`), so each code editor supporting displaying them will show the method documented each time it is called within your code.
 
 The presentation of some of the Cx::Vector abilities is done in the *Examples* project's source code files.
-<br/>So to fully check the abilities of the SharpVector utility, please go to the [Examples](https://github.com/BartoszKlonowski/SharpVector/tree/main/Examples) directory.
+<br/>So to fully check the abilities of the ExtendedVector utility, please go to the [Examples](https://github.com/BartoszKlonowski/ExtendedVector/tree/main/Examples) directory.
 
-Below you can find just a short demo of what the *SharpVector* project is all about and what are the example benefits of using it:
+Below you can find just a short demo of what the *ExtendedVector* project is all about and what are the example benefits of using it:
 ```cpp
     Cx::Vector<std::string> vector;
     vector.push_back( "Hello" );
@@ -119,13 +119,13 @@ Animal:Cat Animal:Wolf Animal:Dog
 
 ## Contributing ##
 
-If you would like to contribute to the *SharpVector* project, you are more than welcome!
+If you would like to contribute to the *ExtendedVector* project, you are more than welcome!
 <br/>Any contribution is to make the project better and to improve the developer's experience.
 <br/>So if you'd like to contribute, you can do this in one of the following ways:
 
-* Create an [Issue](https://github.com/BartoszKlonowski/SharpVector/issues/new) and let the author handle it
-<br/>Each issue created in the [Issues](https://github.com/BartoszKlonowski/SharpVector/issues) section gives a chance of improving the project and make it even more useful.
-* Create the [Pull Request](https://github.com/BartoszKlonowski/SharpVector/compare) with the desired changes
+* Create an [Issue](https://github.com/BartoszKlonowski/ExtendedVector/issues/new) and let the author handle it
+<br/>Each issue created in the [Issues](https://github.com/BartoszKlonowski/ExtendedVector/issues) section gives a chance of improving the project and make it even more useful.
+* Create the [Pull Request](https://github.com/BartoszKlonowski/ExtendedVector/compare) with the desired changes
 <br/>After a detailed review it will be merged.
 <br/>Please remember to give the detailed description of why such change is needed, what is the test plan and what are the details of your implementation. This will make the review easier and quicker.
 <br/>Please also remember to check the unit tests and implement additional tests in case of providing the project with some new features/new code.
@@ -134,4 +134,4 @@ If you would like to contribute to the *SharpVector* project, you are more than 
 
 ## Thank you! ##
 
-If you like this project, or you consider it helpfull, please share your opinion with the author or just give it a star!
+If you like this project, or you find it helpful, please share your opinion with the author or just give it a star!
