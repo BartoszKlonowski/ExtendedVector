@@ -1,4 +1,4 @@
-name: SharpVector-Source
+name: ExtendedVector-Source
 
 on: [push]
 
@@ -18,10 +18,10 @@ jobs:
         uses: nuget/setup-nuget@v1
 
       - name: Restore all the packages
-        run: nuget restore SharpVector.sln
+        run: nuget restore ExtendedVector.sln
 
       - name: Build Debug x64
-        run: msbuild -p:Configuration=Debug -p:Platform=x64 SharpVector.sln -target:Source
+        run: msbuild -p:Configuration=Debug -p:Platform=x64 ExtendedVector.sln -target:Source
 
 
   Build-MSBuild-Release-x64:
@@ -39,10 +39,10 @@ jobs:
         uses: nuget/setup-nuget@v1
 
       - name: Restore all the packages
-        run: nuget restore SharpVector.sln
+        run: nuget restore ExtendedVector.sln
 
       - name: Build Debug x64
-        run: msbuild -p:Configuration=Release -p:Platform=x64 SharpVector.sln -target:Source
+        run: msbuild -p:Configuration=Release -p:Platform=x64 ExtendedVector.sln -target:Source
 
 
   Build-CMake-Debug:
