@@ -1,1 +1,1 @@
-nuget.exe pack SharpVector.nuspec -OutputDirectory ..\..\Build
+nuget.exe pack ExtendedVector.nuspec -OutputDirectory ..\..\Build

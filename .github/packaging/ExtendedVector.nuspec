@@ -1,21 +1,21 @@
 <?xml version="1.0"?>
 <package >
     <metadata>
-        <id>SharpVector</id>
+        <id>ExtendedVector</id>
         <version>1.0.0</version>
         <description>
-            SharpVector utility - std::vector with all .NET's List features: ForEach, FindAll, and more!
+            ExtendedVector utility - std::vector with all .NET's List features: ForEach, FindAll, and more!
             Increase your productivity and vector handling with just one header.
         </description>
         <authors>BartoszKlonowski</authors>
         <tags>Native native vector Cpp List ForEach FindAll BinarySearch Exists CopyTo Find IndexOf</tags>
         <license type="file">LICENSE.txt</license>
-        <projectUrl>https://github.com/BartoszKlonowski/SharpVector</projectUrl>
+        <projectUrl>https://github.com/BartoszKlonowski/ExtendedVector</projectUrl>
     </metadata>
 
     <files>
         <file src="LICENSE.txt"               target="" />
-        <file src="README.txt"                target="SharpVector" />
-        <file src="./../../Source/Vector.hpp" target="SharpVector" />
+        <file src="README.txt"                target="ExtendedVector" />
+        <file src="./../../Source/Vector.hpp" target="ExtendedVector" />
     </files>
 </package>
