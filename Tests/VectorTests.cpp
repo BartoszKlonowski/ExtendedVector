@@ -1,5 +1,6 @@
 #include "CppUnitTest.h"
 #include "Vector.hpp"
+#include <array>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -221,7 +222,7 @@ namespace Cx
         }
 
 
-        TEST_METHOD( CopyToWithCustomStartingIndexesOfBothArrays )
+        TEST_METHOD( CopyToArrayPointerWithCustomStartingIndexesOfBothArrays )
         {
             vector.AddRange( { 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19 } );
             int destinationArray[10] = { 0,1,2,3,4,5 };
@@ -231,7 +232,7 @@ namespace Cx
             Assert::IsTrue( destinationArray[9] == 13 );
         }
 
-        TEST_METHOD( CopyToAllElements )
+        TEST_METHOD( CopyToArrayPointerAllElements )
         {
             vector.AddRange( { 10,11,12,13,14,15,16,17,18,19 } );
             int destinationArray[10] = { 0,1,2,3,4,5 };
@@ -242,10 +243,74 @@ namespace Cx
             Assert::IsTrue( destinationArray[8] == 18 );
         }
 
-        TEST_METHOD( CopyToAllElementsWithCustomStartingIndex )
+        TEST_METHOD( CopyToArrayPointerAllElementsWithCustomStartingIndex )
         {
             vector.AddRange( { 6,7,8,9 } );
             int destinationArray[10] = { 0,1,2,3,4,5 };
+            vector.CopyTo( destinationArray, 10, 6 );
+            Assert::IsTrue( destinationArray[0] == 0 );
+            Assert::IsTrue( destinationArray[6] == 6 );
+            Assert::IsTrue( destinationArray[7] == 7 );
+            Assert::IsTrue( destinationArray[8] == 8 );
+        }
+
+        TEST_METHOD( CopyToVectorWithCustomStartingIndexesOfBothArrays )
+        {
+            vector.AddRange( { 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19 } );
+            std::vector<int> destinationArray = { 0,1,2,3,4,5 };
+            vector.CopyTo( 11, destinationArray, 7, 3 );
+            Assert::IsTrue( destinationArray[7] == 11 );
+            Assert::IsTrue( destinationArray[8] == 12 );
+            Assert::IsTrue( destinationArray[9] == 13 );
+        }
+
+        TEST_METHOD( CopyToVectorAllElements )
+        {
+            vector.AddRange( { 10,11,12,13,14,15,16,17,18,19 } );
+            std::vector<int> destinationArray = { 0,1,2,3,4,5 };
+            vector.CopyTo( destinationArray, 10 );
+            Assert::IsTrue( destinationArray[0] == 10 );
+            Assert::IsTrue( destinationArray[6] == 16 );
+            Assert::IsTrue( destinationArray[7] == 17 );
+            Assert::IsTrue( destinationArray[8] == 18 );
+        }
+
+        TEST_METHOD( CopyToVectorAllElementsWithCustomStartingIndex )
+        {
+            vector.AddRange( { 6,7,8,9 } );
+            std::vector<int> destinationArray = { 0,1,2,3,4,5 };
+            vector.CopyTo( destinationArray, 10, 6 );
+            Assert::IsTrue( destinationArray[0] == 0 );
+            Assert::IsTrue( destinationArray[6] == 6 );
+            Assert::IsTrue( destinationArray[7] == 7 );
+            Assert::IsTrue( destinationArray[8] == 8 );
+        }
+
+        TEST_METHOD( CopyToArrayWithCustomStartingIndexesOfBothArrays )
+        {
+            vector.AddRange( { 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19 } );
+            std::array<int, 10> destinationArray = { 0,1,2,3,4,5 };
+            vector.CopyTo( 11, destinationArray, 7, 3 );
+            Assert::IsTrue( destinationArray[7] == 11 );
+            Assert::IsTrue( destinationArray[8] == 12 );
+            Assert::IsTrue( destinationArray[9] == 13 );
+        }
+
+        TEST_METHOD( CopyToArrayAllElements )
+        {
+            vector.AddRange( { 10,11,12,13,14,15,16,17,18,19 } );
+            std::array<int, 10> destinationArray = { 0,1,2,3,4,5 };
+            vector.CopyTo( destinationArray, 10 );
+            Assert::IsTrue( destinationArray[0] == 10 );
+            Assert::IsTrue( destinationArray[6] == 16 );
+            Assert::IsTrue( destinationArray[7] == 17 );
+            Assert::IsTrue( destinationArray[8] == 18 );
+        }
+
+        TEST_METHOD( CopyToArrayAllElementsWithCustomStartingIndex )
+        {
+            vector.AddRange( { 6,7,8,9 } );
+            std::array<int, 10> destinationArray = { 0,1,2,3,4,5 };
             vector.CopyTo( destinationArray, 10, 6 );
             Assert::IsTrue( destinationArray[0] == 0 );
             Assert::IsTrue( destinationArray[6] == 6 );
