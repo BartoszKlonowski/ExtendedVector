@@ -325,6 +325,45 @@ namespace Cx
             Assert::IsTrue( destinationArray[8] == 8 );
         }
 
+        TEST_METHOD( CopyToThisVectorWithCustomStartingIndexesOfBothArrays )
+        {
+            vector.AddRange( { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 } );
+            Vector<int> destinationArray = { 0, 1, 2, 3, 4, 5 };
+            vector.CopyTo( 11, destinationArray, 3, 3 );
+            Assert::IsTrue( destinationArray[3] == 11 );
+            Assert::IsTrue( destinationArray[4] == 12 );
+            Assert::IsTrue( destinationArray[5] == 13 );
+            Assert::IsTrue( destinationArray[6] == 3 );
+            Assert::IsTrue( destinationArray[7] == 4 );
+            Assert::IsTrue( destinationArray[8] == 5 );
+        }
+
+        TEST_METHOD( CopyToThisVectorAllElements )
+        {
+            vector.AddRange( { 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 } );
+            Vector<int> destinationArray = { 0, 1, 2, 3, 4, 5 };
+            vector.CopyTo( destinationArray );
+            Assert::IsTrue( destinationArray[0] == 10 );
+            Assert::IsTrue( destinationArray[6] == 16 );
+            Assert::IsTrue( destinationArray[7] == 17 );
+            Assert::IsTrue( destinationArray[8] == 18 );
+            Assert::IsTrue( destinationArray[10] == 0 );
+            Assert::IsTrue( destinationArray[11] == 1 );
+        }
+
+        TEST_METHOD( CopyToThisVectorAllElementsWithCustomStartingIndex )
+        {
+            vector.AddRange( { 6, 7, 8, 9 } );
+            Vector<int> destinationArray = { 0, 1, 2, 3, 4, 5 };
+            vector.CopyTo( destinationArray, 4 );
+            Assert::IsTrue( destinationArray[0] == 0 );
+            Assert::IsTrue( destinationArray[3] == 3 );
+            Assert::IsTrue( destinationArray[4] == 6 );
+            Assert::IsTrue( destinationArray[6] == 8 );
+            Assert::IsTrue( destinationArray[7] == 9 );
+            Assert::IsTrue( destinationArray[8] == 4 );
+        }
+
 
         TEST_METHOD( FindBasicTypeElement )
         {
