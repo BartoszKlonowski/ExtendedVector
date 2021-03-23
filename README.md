@@ -32,7 +32,7 @@ To use this tool:
 
 **NOTE:**
 <br/>ExtendedVector already uses several other includes from standard library, such as the following:
-<br/>*vector*, *iostream*, *algorithm*, *functional*
+<br/>*vector*, *iostream*, *algorithm*, *functional*, *array*
 
 ---
 
