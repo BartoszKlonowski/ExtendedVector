@@ -307,7 +307,7 @@ namespace Cx
         {
             vector.AddRange( { 10,11,12,13,14,15,16,17,18,19 } );
             std::array<int, 10> destinationArray = { 0,1,2,3,4,5 };
-            vector.CopyTo( destinationArray, 10 );
+            vector.CopyTo( destinationArray );
             Assert::IsTrue( destinationArray[0] == 10 );
             Assert::IsTrue( destinationArray[6] == 16 );
             Assert::IsTrue( destinationArray[7] == 17 );
@@ -318,7 +318,7 @@ namespace Cx
         {
             vector.AddRange( { 6,7,8,9 } );
             std::array<int, 10> destinationArray = { 0,1,2,3,4,5 };
-            vector.CopyTo( destinationArray, 10, 6 );
+            vector.CopyTo( destinationArray, 6 );
             Assert::IsTrue( destinationArray[0] == 0 );
             Assert::IsTrue( destinationArray[6] == 6 );
             Assert::IsTrue( destinationArray[7] == 7 );

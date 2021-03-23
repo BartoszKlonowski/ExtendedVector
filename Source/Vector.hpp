@@ -4,6 +4,7 @@
 #include <iostream>
 #include <algorithm>
 #include <functional>
+#include <array>
 
 
 namespace Cx
@@ -240,6 +241,45 @@ namespace Cx
         {
             for( unsigned int i = 0; i < this->size(); ++i )
                 array.insert( array.cbegin() + i + arrayIndex, this->at( i ) );
+        }
+
+        /// <summary>
+        /// Copies a range of elements from the Vector to a compatible one-dimensional array starting at the specified index of the target
+        /// </summary>
+        /// <param name="index">The zero-based index in the source Vector at which copying begins</param>
+        /// <param name="array">The destination std::vector where the elements are copied to from Vector.</param>
+        /// <param name="arrayIndex">The zero-based index in array at which copying begins</param>
+        /// <param name="count">The number of elements to copy</param>
+        template<std::size_t size>
+        void CopyTo( const unsigned int index, std::array<T, size>& array, const unsigned int arrayIndex, const unsigned int count )
+        {
+            if( index >= this->size() || arrayIndex >= array.size() )
+                throw std::out_of_range( "index exceeds the size of Vector" );
+            for( unsigned int copiedElements = 0; copiedElements < count; ++copiedElements )
+                array[copiedElements + arrayIndex] = this->operator[]( index + copiedElements );
+        }
+
+        /// <summary>
+        /// Copies the entire Vector to a compatible std::vector, starting at the beginning of the target array
+        /// </summary>
+        /// <param name="array">The std::vector that is the destination of the elements copied from Vector</param>
+        template<std::size_t size>
+        void CopyTo( std::array<T, size>& array )
+        {
+            for( unsigned int i = 0; i < this->size(); ++i )
+                array[i] = this->at( i );
+        }
+
+        /// <summary>
+        /// Copies the entire Vector to a compatible std::vector, starting at the specified index of the target array
+        /// </summary>
+        /// <param name="array">The std::vector that is the destination of the elements copied from Vector</param>
+        /// <param name="arrayIndex">The zero-based index in the array at which copying begins</param>
+        template<std::size_t size>
+        void CopyTo( std::array<T, size>& array, unsigned int arrayIndex )
+        {
+            for( unsigned int i = 0; i < this->size(); ++i )
+                array[i + arrayIndex] = this->at( i );
         }
 #pragma endregion
 
