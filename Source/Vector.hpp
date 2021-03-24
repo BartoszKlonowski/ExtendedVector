@@ -247,7 +247,7 @@ namespace Cx
         /// Copies a range of elements from the Vector to a compatible one-dimensional array starting at the specified index of the target
         /// </summary>
         /// <param name="index">The zero-based index in the source Vector at which copying begins</param>
-        /// <param name="array">The destination std::vector where the elements are copied to from Vector.</param>
+        /// <param name="array">The destination std::array where the elements are copied to from Vector.</param>
         /// <param name="arrayIndex">The zero-based index in array at which copying begins</param>
         /// <param name="count">The number of elements to copy</param>
         template<std::size_t size>
@@ -260,9 +260,9 @@ namespace Cx
         }
 
         /// <summary>
-        /// Copies the entire Vector to a compatible std::vector, starting at the beginning of the target array
+        /// Copies the entire Vector to a compatible std::array, starting at the beginning of the target array
         /// </summary>
-        /// <param name="array">The std::vector that is the destination of the elements copied from Vector</param>
+        /// <param name="array">The std::array that is the destination of the elements copied from Vector</param>
         template<std::size_t size>
         void CopyTo( std::array<T, size>& array )
         {
@@ -271,9 +271,9 @@ namespace Cx
         }
 
         /// <summary>
-        /// Copies the entire Vector to a compatible std::vector, starting at the specified index of the target array
+        /// Copies the entire Vector to a compatible std::array, starting at the specified index of the target array
         /// </summary>
-        /// <param name="array">The std::vector that is the destination of the elements copied from Vector</param>
+        /// <param name="array">The std::array that is the destination of the elements copied from Vector</param>
         /// <param name="arrayIndex">The zero-based index in the array at which copying begins</param>
         template<std::size_t size>
         void CopyTo( std::array<T, size>& array, unsigned int arrayIndex )
