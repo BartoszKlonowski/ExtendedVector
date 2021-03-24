@@ -28,7 +28,7 @@ To use this tool:
 
 **NOTE:**
 ExtendedVector already uses several other includes from standard library, such as the following:
-*vector*, *iostream*, *algorithm*, *functional*
+*vector*, *iostream*, *algorithm*, *functional*, *array*
 
 ---
 
