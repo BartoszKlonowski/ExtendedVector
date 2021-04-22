@@ -13,11 +13,24 @@ namespace Cx
     class Vector : public std::vector<T>
     {
     public:
+#pragma region Constructors
         Vector() noexcept : std::vector<T>()
         {}
 
         Vector( std::initializer_list<T> initialValues ) noexcept : std::vector<T>( initialValues )
         {}
+
+        /// <summary>
+        /// Initializes a new instance of the Vector class that is empty and has the specified initial capacity.
+        /// </summary>
+        /// <param name="capacity">The number of elements that the new vector can initially store</param>
+        /// <returns></returns>
+        Vector( const int capacity ) : std::vector<T>( capacity )
+        {
+            if( capacity < 0 )
+                throw std::invalid_argument( "capacity cannot be lower than 0" );
+        }
+#pragma endregion
 
 #pragma region AddRange
         /// <summary>
