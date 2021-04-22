@@ -33,8 +33,22 @@ namespace Cx
         };
 
     public:
-		
-		TEST_METHOD( AddRangeByInitializerListTest )
+
+        TEST_METHOD( ConstructVectorByCapacity )
+        {
+            const size_t correctCapacity = 10;
+            auto capacityVec = Cx::Vector<int>( correctCapacity );
+            Assert::IsTrue( capacityVec.capacity() == correctCapacity );
+        }
+
+        TEST_METHOD( CapacityConstructorThrowsWhenNegativeCapacity )
+        {
+            const int negativeCapacity = -10;
+            Assert::ExpectException<std::exception>( [=]()->void { auto vec = Cx::Vector<int>( negativeCapacity ); } );
+        }
+
+
+        TEST_METHOD( AddRangeByInitializerListTest )
         {
             vector.AddRange( { 1,4,12,8 } );
             Assert::IsTrue( vector[0] == 1 );
