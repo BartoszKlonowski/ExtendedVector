@@ -1,3 +1,6 @@
+// Copyright (c) Cx Code - Bartosz Klonowski.
+// Licensed under the MIT License.
+
 #include "../ErrorCodes.hpp"
 #include "../../Source/Vector.hpp"
 #include <string>
