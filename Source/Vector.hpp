@@ -77,6 +77,28 @@ namespace Cx
             for( auto element : vector )
                 this->push_back( element );
         }
+
+        /// <summary>
+        /// Adds all elements of the specified collection to the end of the Vector
+        /// </summary>
+        /// <param name="range">The collection given as std::array, whose elements should be moved to the end of current Vector</param>
+        template<std::size_t size>
+        void AddRange( const std::array<T, size>& range ) noexcept
+        {
+            for( auto element : range )
+                this->push_back( element );
+        }
+
+        /// <summary>
+        /// Adds all elements of the specified collection to the end of the Vector
+        /// </summary>
+        /// <param name="range">The collection given as std::array, whose elements should be moved to the end of current Vector</param>
+        template<std::size_t size>
+        void AddRange( std::array<T, size>&& range ) noexcept
+        {
+            for( auto element : range )
+                this->push_back( element );
+        }
 #pragma endregion
 
 #pragma region Contains

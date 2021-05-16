@@ -95,6 +95,25 @@ namespace Cx
             Assert::IsTrue( vector[3] == 56 );
         }
 
+        TEST_METHOD( AddRangeByStandardArrayGivenByReference )
+        {
+            std::array<int, 4> range( { 1, 15, 23, 56 } );
+            vector.AddRange( std::move( range ) );
+            Assert::IsTrue( vector[0] == 1 );
+            Assert::IsTrue( vector[1] == 15 );
+            Assert::IsTrue( vector[2] == 23 );
+            Assert::IsTrue( vector[3] == 56 );
+        }
+
+        TEST_METHOD( AddRangeByStandardArrayGivenByRValue )
+        {
+            std::array<int, 4> range( { 1, 15, 23, 56 } );
+            vector.AddRange( std::move( range ) );
+            Assert::IsTrue( vector[0] == 1 );
+            Assert::IsTrue( vector[1] == 15 );
+            Assert::IsTrue( vector[2] == 23 );
+            Assert::IsTrue( vector[3] == 56 );
+        }
 
         TEST_METHOD( ContainerWithBasicTypesContainsAnElement )
         {
