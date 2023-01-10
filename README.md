@@ -7,10 +7,10 @@
         <img src="https://img.shields.io/github/license/BartoszKlonowski/ExtendedVector?style=plastic" alt="ExtendedVector is released under the MIT license." />
     </a>
     <a href="https://github.com/BartoszKlonowski/ExtendedVector/actions/workflows/ExtendedVector-Tests.yml">
-        <img src="https://img.shields.io/github/workflow/status/BartoszKlonowski/ExtendedVector/ExtendedVector-Tests?label=Tests&style=plastic" alt="Unit Tests status" />
+        <img src="https://img.shields.io/github/actions/workflow/status/BartoszKlonowski/ExtendedVector/ExtendedVector-Tests.yml?label=Tests&style=plastic" alt="Unit Tests status" />
     </a>
     <a href="https://github.com/BartoszKlonowski/ExtendedVector/actions/workflows/ExtendedVector-Source.yml">
-        <img src="https://img.shields.io/github/workflow/status/BartoszKlonowski/ExtendedVector/ExtendedVector-Source?label=Build%3A%20CMake%20%26%20MSBuild&style=plastic" alt="Source: CMake & MSBuild build status" />
+        <img src="https://img.shields.io/github/actions/workflow/status/BartoszKlonowski/ExtendedVector/ExtendedVector-Source.yml?label=Build%3A%20CMake%20%26%20MSBuild&style=plastic" alt="Source: CMake & MSBuild build status" />
     </a>
 </p>
 
